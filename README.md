@@ -27,7 +27,9 @@ organically over the years and it shows. Patches welcome.
 [this ISO image](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.0.0+nonfree/amd64/iso-cd/firmware-11.0.0-amd64-netinst.iso)
 and `dd` or `cp` it to a USB stick at least 1GB in size.
 
-3. Download the scripts in this repository and copy them to a FAT32-formatted USB stick.
+3. Download the scripts in this repository and copy them to a FAT32-formatted USB stick. The Debian
+   image is read-only so you can't put the scripts on your first stick, but you can wipe it after
+   you've rebooted for the first time, reformat it to FAT32 and copy the scripts on it.
 
 4. Have some form or wired networking. Either ethernet, or a USB-to-ethernet adpater. I always use a
    USB-tethered cell-phone out of habit. Make sure it's on WiFi because there's going to be a lot to
@@ -250,7 +252,7 @@ as root to update it when a package fails to install because of an outdated chec
 These all set a bunch of variables and start GameMode automatically. The difference between them is
 that the first one does not cap the frame rate, the second one caps it at 30fps and the last one at
 60fps. Using the latter two enables to save on power and fan noise, all the while avoiding tearing.
-If you need help convincing yourself this is a good this, it's what the Steam Deck will supposedly
+If you need help convincing yourself this is a good thing, it's what the Steam Deck will supposedly
 do.
 
 They don't include the Wine executable though, so you can choose which one you want to run. Example:
