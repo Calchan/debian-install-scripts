@@ -1,0 +1,5 @@
+[Hotkey/TriggerKeys]
+0=Super+space
+
+[Behavior]
+ShareInputState=No

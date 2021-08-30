@@ -1,0 +1,34 @@
+set background=dark
+set mouse=n
+set laststatus=2
+set scrolloff=5
+set hlsearch
+set number
+set wildmode=list:longest
+
+set colorcolumn=101
+highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
+
+syntax on
+filetype indent plugin on
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set textwidth=100
+set expandtab
+set autoindent
+set fileformat=unix
+
+set listchars=eol:$,nbsp:_,tab:>-,trail:~,extends:>,precedes:<
+set whichwrap+=<,>,[,]
+
+set spelllang=en_us
+set spellfile=~/.vim/en.utf-8.add
+
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2
+
+autocmd FileType markdown setlocal spell

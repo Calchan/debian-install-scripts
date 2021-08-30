@@ -1,0 +1,11 @@
+[Unit]
+Description=Set /sys permissions for GameMode
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/gamemode-perms
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=graphical.target

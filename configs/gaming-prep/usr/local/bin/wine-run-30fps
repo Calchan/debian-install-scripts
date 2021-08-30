@@ -1,0 +1,5 @@
+export WINEESYNC=1
+export WINEFSYNC=1
+export PULSE_LATENCY_MSEC=60
+export DXVK_FRAME_RATE=30
+gamemoderun "${@}"
