@@ -250,6 +250,8 @@ as root to update it when a package fails to install because of an outdated chec
 These all set a bunch of variables and start GameMode automatically. The difference between them is
 that the first one does not cap the frame rate, the second one caps it at 30fps and the last one at
 60fps. Using the latter two enables to save on power and fan noise, all the while avoiding tearing.
+If you need help convincing yourself this is a good this, it's what the Steam Deck will supposedly
+do.
 
 They don't include the Wine executable though, so you can choose which one you want to run. Example:
 
