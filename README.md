@@ -56,7 +56,7 @@ After that, a single partition is enough. If you like your life complicated and 
 that's fine too. I tend to use btrfs everywhere but ext4 is probably a better choice here. Don't
 forget to set the `discard` (you're using an SSD, right?) and `noatime` mount options.
 
-When you get to the software selection part make sure to unselect everything, Yes, even the standard
+When you get to the software selection part make sure to unselect everything. Yes, even the standard
 system utilities or whatever it's called at the bottom of the list. EVERYTHING. We'll do better with
 the scripts.
 
@@ -64,6 +64,9 @@ That's it.
 
 
 ## Using the scripts
+
+Once you reboot, use the root account and password to login. Insert the second USB stick with the
+scripts and locate it using `fdisk -l`, then mount it wherever you want.
 
 The scripts are split in multiple parts so you can decide what you install. The only exception is
 `1-initial-cleanup.sh` and `2-base.sh` which could have been one and the same if, on rare occasions,
