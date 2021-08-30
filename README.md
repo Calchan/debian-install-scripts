@@ -23,8 +23,8 @@ organically over the years and it shows. Patches welcome.
 
 1. Read these instructions entirely and carefully.
 
-2. Download [this ISO image]
-(https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.0.0+nonfree/amd64/iso-cd/firmware-11.0.0-amd64-netinst.iso)
+2. Download
+[this ISO image](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.0.0+nonfree/amd64/iso-cd/firmware-11.0.0-amd64-netinst.iso)
 and `dd` or `cp` it to a USB stick at least 1GB in size.
 
 3. Download the scripts in this repository and copy them to a FAT32-formatted USB stick.
@@ -175,7 +175,7 @@ version of your games even when a Linux version exists. Bad Linux ports are bad.
   script are automatically added to the `games` group. Second, GameMode contains a very neat feature
   called iGPU governor which is unfortunately and irremediably broken. I call this *poor man's
   SmartShift for Intel*. It balances the power between the CPU and GPU depending on needs. I have
-  filed [a ticket] (https://github.com/FeralInteractive/gamemode/issues/337) with a partial
+  filed [a ticket](https://github.com/FeralInteractive/gamemode/issues/337) with a partial
   workaround and suggestions for other solutions, but no reaction so far. A complete fix is
   automatically applied with this script.
 
