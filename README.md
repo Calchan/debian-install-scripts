@@ -35,7 +35,8 @@ and `dd` or `cp` it to a USB stick at least 1GB in size.
    USB-tethered cell-phone out of habit. Make sure it's on WiFi because there's going to be a lot to
    download. You could, under certain circumstances, be able to bring up WiFi for the second part of
    the installation process but it's not guarantied and a pain. Save yourself some time and trouble,
-   just use wired networking.
+   just use wired networking. Once the installation is completed you'll be able to use WiFi just
+   fine, obviously.
 
 
 ## Debian installation
