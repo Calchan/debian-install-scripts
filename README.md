@@ -273,10 +273,29 @@ There again you can replace `wine-run` with any of the other two scripts.
 
 ## Miscellaneous
 
+### Steam
+
+In Settings → Library, check "Low Bandwidth Mode" and "Low Performance Mode" (this is for the client,
+not for your games).
+
+In Settings → Steam Play, check "Enable Steam Play for all other titles" and select Proton
+Experimental in the list just below.
+
+Download the Proton Experimental package by searching for it in your library. You'll need it it
+below.
+
+
 ### Heroic games launcher
+
+Set the global settings which can later be changed independently for each game.
+
+In Settings → Wine, pick Proton Experimental in the Wine Version dropdown list.
 
 In Settings → Other, set the content of "Advanced Options (Environment Variables)" to:
 
 ```WINEESYNC=1 WINEFSYNC=1 DXVK_FRAME_RATE=30```
 
 Change the DXVK_FRAME_RATE value or omit it entirely as desired.
+
+You should use a different Wine prefix for each game. I create a `.wine` directory at the top of
+each game directory.
