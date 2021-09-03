@@ -16,7 +16,7 @@ apt install -y \
     gvfs-backends gvfs-fuse \
     thunar-archive-plugin unzip unrar \
     ristretto \
-    mpv \
+    mpv libopenblas-base \
     seahorse \
     galculator
 
