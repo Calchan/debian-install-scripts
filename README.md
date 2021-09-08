@@ -185,6 +185,11 @@ version of your games even when a Linux version exists. Bad Linux ports are bad.
   workaround and suggestions for other solutions, but no reaction so far. A complete fix is
   automatically applied with this script.
 
+- MangoHud is installed with a suitable configuration. There's also a permission fix similar to the
+  one above. It's pre-configured to allow you to cap the frame rate just like the Steam Deck will
+  supposedly do. Use Shift_R+F12 to toggle the HUD and Shift_L+F1 to cycle the FPS cap (unlimited by
+  default, then 60fps, then 30fps).
+
 - Install the Heroic games launcher. This is an alternative to the bloated Epic launcher. It works
   great and is full of useful conveniences. If you've been obediently redeeming these free Epic
   games every week you should have a fair number of them by now, some of them very good. Make sure
@@ -248,28 +253,20 @@ As explained above we don't use the packaged version of winetricks. Run `winetri
 as root to update it when a package fails to install because of an outdated checksum.
 
 
-### `wine-run`, `wine-run-30fps` and `wine-run-60fps`
+### `run-game`
 
-These all set a bunch of variables and start GameMode automatically. The difference between them is
-that the first one does not cap the frame rate, the second one caps it at 30fps and the last one at
-60fps. Using the latter two enables to save on power and fan noise, all the while avoiding tearing.
-If you need help convincing yourself this is a good thing, it's what the Steam Deck will supposedly
-do.
+It sets a bunch of variables and starts GameMode and MangoHud automatically.
 
-They don't include the Wine executable though, so you can choose which one you want to run. Example:
+They don't include the Wine executable though, so you can choose which one you want or use it with a
+native game. Example:
 
 ```
-wine-run wine hl3.exe
+run-game wine hl3.exe
 ```
-
-You can and should replace `wine-run` with any of the other two scripts and `wine` with your
-favorite Wine implementation (`wine-development`, Proton, etc…)
 
 In Steam you can set your game's launch options (in the Properties… → GENERAL menu) to:
 
-```wine-run %command%```
-
-There again you can replace `wine-run` with any of the other two scripts.
+```run-game %command%```
 
 
 ## Miscellaneous
@@ -290,13 +287,15 @@ below.
 
 Set the global settings which can later be changed independently for each game.
 
-In Settings → Wine, pick Proton Experimental in the Wine Version dropdown list.
+In Settings → Wine, choose Proton Experimental in the Wine Version dropdown list.
 
-In Settings → Other, set the content of "Advanced Options (Environment Variables)" to:
+In Settings → Other, enable GameMode, Audio Fix, MangoHud and Run Game Offline (disable this last
+one individually for games which need it).
 
-```WINEESYNC=1 WINEFSYNC=1 DXVK_FRAME_RATE=30```
+Set the content of "Advanced Options (Environment
+Variables)" to:
 
-Change the DXVK_FRAME_RATE value or omit it entirely as desired.
+```WINEESYNC=1 WINEFSYNC=1```
 
 You should use a different Wine prefix for each game. I create a `.wine` directory at the top of
 each game directory.
