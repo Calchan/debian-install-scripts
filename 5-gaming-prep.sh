@@ -5,7 +5,7 @@ set -e
 dpkg --add-architecture i386
 apt update
 
-apt install -y dxvk ttf-mscorefonts-installer winbind gamemode wine wine-development steam
+apt install -y dxvk ttf-mscorefonts-installer winbind gamemode mangohud wine wine-development steam
 
 for userdir in /home/*; do
     mkdir -p "${userdir}/.config/systemd/user/default.target.wants"
@@ -17,7 +17,7 @@ for userdir in /home/*; do
     gpasswd -a "${username}" games
 done
 
-cd configs/gaming-prep
+pushd configs/xfce/root > /dev/null
 for file in $(find * -type f); do
     mkdir -p "$(dirname "/${file}")"
     cp -f "${file}" "/${file}"
@@ -28,6 +28,21 @@ wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetric
 chmod +x *
 mkdir -p /etc/systemd/system/graphical.target.wants
 ln -sf /etc/systemd/system/gamemode-perms.service /etc/systemd/system/graphical.target.wants/gamemode-perms.service
+popd > /dev/null
+
+cd configs/xfce/user
+for userdir in /home/*; do
+    for file in $(find . -type f); do
+        mkdir -p "$(dirname "${userdir}/${file}")"
+        cp -f "${file}" "${userdir}/${file}"
+        chmod 644 "${userdir}/${file}"
+    done
+    find "${userdir}" -type d -exec chmod 0755 \{\} \;
+    find "${userdir}" -type f -exec chmod 0644 \{\} \;
+    chmod -R go-rwx "${userdir}/.ssh"
+    username=$(basename "${userdir}")
+    chown -R "${username}":"${username}" "${userdir}"
+done
 
 cd /tmp
 /usr/local/bin/update-heroic
