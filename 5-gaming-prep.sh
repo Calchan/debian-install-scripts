@@ -17,7 +17,7 @@ for userdir in /home/*; do
     gpasswd -a "${username}" games
 done
 
-pushd configs/xfce/root > /dev/null
+pushd configs/gaming-prep/root > /dev/null
 for file in $(find * -type f); do
     mkdir -p "$(dirname "/${file}")"
     cp -f "${file}" "/${file}"
@@ -27,10 +27,10 @@ cd /usr/local/bin
 wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
 chmod +x *
 mkdir -p /etc/systemd/system/graphical.target.wants
-ln -sf /etc/systemd/system/gamemode-perms.service /etc/systemd/system/graphical.target.wants/gamemode-perms.service
+ln -sf /etc/systemd/system/intel-rapl-perms.service /etc/systemd/system/graphical.target.wants/intel-rapl-perms.service
 popd > /dev/null
 
-cd configs/xfce/user
+cd configs/gaming-prep/user
 for userdir in /home/*; do
     for file in $(find . -type f); do
         mkdir -p "$(dirname "${userdir}/${file}")"

@@ -234,10 +234,10 @@ They're all installed in `/usr/local/bin` so they're all available in your PATH 
 of the package manager.
 
 
-### `gamemode-perms`
+### `intel-rapl-perms`
 
-This is part of one of the fixes for GameMode and automatically started by a systemd service. You
-will never have to use this manually or even update it.
+This is part of the fixes for GameMode and MangoHud. It's automatically started by a systemd
+service. You will never have to use this manually or even update it.
 
 
 ### `update-heroic`
