@@ -6,6 +6,7 @@ dpkg --add-architecture i386
 apt update
 
 apt install -y dxvk ttf-mscorefonts-installer winbind gamemode mangohud wine wine-development steam
+apt purge -y xterm
 
 for userdir in /home/*; do
     mkdir -p "${userdir}/.config/systemd/user/default.target.wants"
