@@ -7,6 +7,15 @@ for DELAY in 1 2 4 8 15 30 60; do
     sleep "${DELAY}"
 done
 
+echo ">>> /sys/class/powercap/intel-rapl/intel-rapl:0/name"
+echo "Name: $(cat "/sys/class/powercap/intel-rapl/intel-rapl:0/name")"
+echo "Before:"
+ls -als "/sys/class/powercap/intel-rapl/intel-rapl:0/energy_uj"
+chown root:games "/sys/class/powercap/intel-rapl/intel-rapl:0/energy_uj"
+chmod g+r "/sys/class/powercap/intel-rapl/intel-rapl:0/energy_uj"
+echo "After:"
+ls -als "/sys/class/powercap/intel-rapl/intel-rapl:0/energy_uj"
+
 for NAME_PATH in $(find /sys/class/powercap/intel-rapl/intel-rapl\:0/intel-rapl\:0\:* -name name || true); do
     echo ">>> ${NAME_PATH}"
     NAME=$(cat "${NAME_PATH}")
