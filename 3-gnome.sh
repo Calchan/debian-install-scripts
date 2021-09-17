@@ -11,8 +11,9 @@ apt install -y \
     eog \
     gnome-screenshot \
     gnome-calculator \
-    file-roller unrar unzip
-apt purge -y ibus yelp
+    file-roller unrar unzip \
+    libopenblas-base
+apt purge -y ibus yelp termit xterm
 apt autoremove -y
 apt install -y gnome-terminal
 
