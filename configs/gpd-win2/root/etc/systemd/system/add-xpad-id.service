@@ -1,0 +1,11 @@
+[Unit]
+Description=Add GPD Win 2 controller id to xpad module
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/add-xpad-id
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=graphical.target
