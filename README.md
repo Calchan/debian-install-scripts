@@ -31,15 +31,23 @@ and `dd` or `cp` it to a USB stick at least 1GB in size.
    image is read-only so you can't put the scripts on your first stick, but you can wipe it after
    you've rebooted for the first time, reformat it to FAT32 and copy the scripts on it.
 
-4. Have some form or wired networking. Either ethernet, or a USB-to-ethernet adpater. I always use a
+4. Wired networking is recommended. Either ethernet, or a USB-to-ethernet adapter. I always use a
    USB-tethered cell-phone out of habit. Make sure it's on WiFi because there's going to be a lot to
-   download. You could, under certain circumstances, be able to bring up WiFi for the second part of
-   the installation process but it's not guarantied and a pain. Save yourself some time and trouble,
-   just use wired networking. Once the installation is completed you'll be able to use WiFi just
-   fine, obviously.
+   download. In case you really want to use your computer's WiFi for the second part of the
+   installation process instead of wired networking, you must do the first part (the actual Debian
+   install) using the same interface so that the installation software detects and installs all
+   that's needed. Then, once rebooted for the second part, locate your WiFi interface using `ip a`
+   (it's the one or one of those starting with `wl`). Finally, run:
+   ```
+   wpa_passphrase '<your WiFi SSID> '<your WiFi passphrase>' > /tmp/wpa
+   wpa_supplicant -c /tmp/wpa -i <your WiFi interface>
+   dhclient
+   ```
+   If it doesn't work then RTFM or just use wired networking like recommended above.  Once the
+   installation is complete you'll be able to use WiFi just fine, obviously.
 
 
-## Debian installation
+## Debian installation (a.k.a. first part)
 
 Boot the Debian ISO image and do your thing.
 
@@ -66,7 +74,7 @@ the scripts.
 That's it.
 
 
-## Using the scripts
+## Using the scripts (a.k.a. second part)
 
 Once you reboot, use the root account and password to login. Insert the second USB stick with the
 scripts and locate it using `fdisk -l`, then mount it wherever you want.
