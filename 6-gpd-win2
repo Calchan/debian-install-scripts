@@ -10,6 +10,7 @@ for file in $(find * -type f); do
     cp -f "${file}" "/${file}"
     chmod 644 "/${file}"
 done
+chmod +x /usr/local/bin/*
 mkdir -p /etc/systemd/system/graphical.target.wants
 ln -sf /etc/systemd/system/add-xpad-id.service /etc/systemd/system/graphical.target.wants/add-xpad-id.service
 popd > /dev/null
