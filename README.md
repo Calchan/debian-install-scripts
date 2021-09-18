@@ -197,7 +197,8 @@ version of your games even when a Linux version exists. Bad Linux ports are bad.
   control frame rate. There's also a permission fix similar to the one above. It's pre-configured to
   allow you to cap the frame rate just like the Steam Deck will supposedly do. Use Shift_R+F12 to
   toggle the HUD on and Shift_L+F1 to cycle the FPS cap (unlimited by default, then 60fps, then
-  30fps). Use Shift_L+F2 to toggle logging on and off.
+  30fps). Use Shift_L+F2 to toggle logging on and off. Note that sometimes, on 32-bit games, not all
+  stats will show, and the next time they will. MangoHud is somewhat erratic in 32-bit.
 
 - Install the Heroic games launcher. This is an alternative to the bloated Epic launcher. It works
   great and is full of useful conveniences. If you've been obediently redeeming these free Epic
