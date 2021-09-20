@@ -29,6 +29,14 @@ and `dd` or `cp` it to a USB stick at least 1GB in size.
 3. Download the scripts in this repository and copy them to a FAT32-formatted USB stick. The Debian
    image is read-only so you can't put the scripts on your first stick, but you can wipe it after
    you've rebooted for the first time, reformat it to FAT32 and copy the scripts on it.
+   Alternatively, once you reboot for the second part of the install process (see below), you can do
+   this instead:
+
+   ```
+   apt install wget unzip
+   wget https://github.com/Calchan/debian-install-scripts/archive/refs/heads/master.zip
+   unzip master.zip
+   ```
 
 4. Wired networking is recommended. Either ethernet, or a USB-to-ethernet adapter. I always use a
    USB-tethered cell-phone out of habit. Make sure it's on WiFi because there's going to be a lot to
@@ -87,7 +95,7 @@ stop after `2-base.sh` you'll have to figure out networking on your own, but it'
 destination for a server.
 
 Note that your APT sources will be switched to unstable in the process. Stop complaining, it works,
-and you'll be amazed at how stable this is. You did read the part about me using this on my work
+and you'll be amazed at how stable it is. You did read the part about me using this on my work
 machines, right?
 
 
@@ -153,6 +161,18 @@ in place of the free ones. Free as in speech, of course.
 #### `4-japanese-input.sh`
 
 You probably don't need Japanese input. I do.
+
+
+#### `4-kubernetes.sh`
+
+Work stuff again, don't mind me.
+
+Install a repository with some Kubernetes tools, including all versions of `kubectl`. Debian has a
+package for it but for only one, and rather old, version. Often you need a specific version of it,
+to match what your clusters run.
+
+Another repository is added for Helm. The script then installs the latest versions of `kubctl`,
+`kubctx` and `helm`.
 
 
 #### `4-productivity.sh`
