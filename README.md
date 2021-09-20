@@ -10,10 +10,9 @@ all those I've tried worked without exception. Not only that but they typically 
 faster than on Windows. How about ~25fps in GTA5 at 720p on a dumb old Skylake laptop with
 integrated graphics?
 
-None of this is rocket science. Just a collection of settings, tricks and the result of using Linux
-exclusively for 25 years. Some fixes also, like for example for GameMode. I don't know how people
-use it but some of it is broken out of the box. There are some convenience scripts too, read about
-them below.
+None of this is rocket science. Just a collection of settings, tricks, with a goal of simplicity and
+reproducibility. Some fixes also, like for example for GameMode. I don't know how people use it but
+some of it is broken out of the box. There are some convenience scripts too, read about them below.
 
 Finally, these scripts work well but they don't look as nice or clean as I would want it. They grew
 organically over the years and it shows. Patches welcome.
@@ -266,17 +265,17 @@ will throw errors which may end up causing random reboots during the installatio
 
 The recommended list of scripts to use is:
 
-- 1-initial-cleanup.sh
+- `1-initial-cleanup.sh`
 
-- 2-base.sh
+- `2-base.sh`
 
-- 3-xfce.sh
+- `3-xfce.sh`
 
-- 4-intel-drivers.sh
+- `4-intel-drivers.sh`
 
-- 5-gaming-prep.sh
+- `5-gaming-prep.sh`
 
-- 6-gpd-win2
+- `6-gpd-win2`
 
 Once you reboot after the second part of the install process, all hardware should be functional and
 configured properly.
