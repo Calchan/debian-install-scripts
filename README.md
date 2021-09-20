@@ -264,12 +264,31 @@ to rotate the screen for the second part of the install process. The first part 
 sideways. The last two parameters are to fix the SD card interface. Even if you don't use it, it
 will throw errors which may end up causing random reboots during the installation.
 
+The recommended list of scripts to use is:
+
+- 1-initial-cleanup.sh
+
+- 2-base.sh
+
+- 3-xfce.sh
+
+- 4-intel-drivers.sh
+
+- 5-gaming-prep.sh
+
+- 6-gpd-win2
+
+Once you reboot after the second part of the install process, all hardware should be functional and
+configured properly.
+
 Due to the weak CPU, using the `run-game` script (see below) is not recommended. GameMode plays with
 thread priorities and the CPU/GPU power balance to improve performance on a regular machine, but on
 the Win 2 it deprives the CPU from too much of its performance and heavy games end up having low and
 erratic frame rates. In Steam, simply use this for the launch options:
 
-```mangohud %command%```
+```
+mangohud %command%
+```
 
 The recommended Heroic setup doesn't use the `run-game` script so this isn't an issue. See the end
 of this document for how to set it up.
@@ -333,7 +352,9 @@ run-game wine hl3.exe
 
 In Steam you can set your game's launch options (in the Properties… → GENERAL menu) to:
 
-```run-game %command%```
+```
+run-game %command%
+```
 
 
 ## Miscellaneous
