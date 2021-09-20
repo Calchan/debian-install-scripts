@@ -211,17 +211,74 @@ version of your games even when a Linux version exists. Bad Linux ports are bad.
   governor improvements, FSYNC for Wine and Proton, etc…
 
 
-## Experimental stuff
+## Weird and experimental stuff
 
 Some of these scripts require adding the experimental repository to your APT sources. If you don't
 know how to do this you should not play with this. And even if you know you most likely don't want
 to either.
 
 
+### `6-gpd-win2`
+
+The GPD Win 2 is a cute machine made of exotic hardware. This additional script fixes a lot of
+issues when installing Linux to it. Including:
+
+- Rotated display (due to it being from a tablet)
+
+- Rotated touchscreen (same reason)
+
+- Flaky SD card interface
+
+- Not-quite compatible Xbox controller
+
+Due to the compact keyboard, the MangoHud keybinds are changed to:
+
+```
+toggle_hud=Shift_R+F1
+toggle_fps_limit=Shift_R+F2
+toggle_logging=Shift_R+F5
+reload_cfg=Shift_R+F4
+upload_log=Shift_R+F6
+```
+
+XFCE is the recommended DE to install because Gnome eats way too many CPU cycles for such a small
+device. XFCE settings have been adapted to make it easier to read on this small display and use the
+touchscreen.
+
+Using WiFi like described above for both parts of the install process is not a bad idea due to the
+low amount of ports. It's still recommended to use wired networking (with a USB hub for example)
+because the Win 2 is notoriously bad at WiFi. Move close to your AP and put your Win 2 down on a
+table instead of holding it in your hands, since the antennae are where you hold it. You can use the
+SD card reader to clone this repository to, but as far as I know you can't boot from it.
+
+When booting the install Debian ISO, scroll to your preferred entry in the GRUB menu (graphical,
+text-mode, etc…), press E to edit the GRUB configuration for that entry, and add the following to
+the kernel command-line parameters:
+
+```
+video=eDP-1:panel_orientation=right_side_up sdhci.debug_quirks=0x40 sdhci.debug_quirks2=0x04
+```
+
+Triple-check it to make sure you typed it right, especially on this keyboard. The first parameter is
+to rotate the screen for the second part of the install process. The first part will still happen
+sideways. The last two parameters are to fix the SD card interface. Even if you don't use it, it
+will throw errors which may end up causing random reboots during the installation.
+
+Due to the weak CPU, using the `run-game` script (see below) is not recommended. GameMode plays with
+thread priorities and the CPU/GPU power balance to improve performance on a regular machine, but on
+the Win 2 it deprives the CPU from too much of its performance and heavy games end up having low and
+erratic frame rates. In Steam, simply use this for the launch options:
+
+```mangohud %command%```
+
+The recommended Heroic setup doesn't use the `run-game` script so this isn't an issue. See the end
+of this document for how to set it up.
+
+
 ### `6-gaming-experimental.sh`
 
-Switches some if not most of the graphics plumbing to using experimental packages. WARNING: this is
-hard to revert, actually most people think it's impossible. They're wrong, but it doesn't make it
+Switch some if not most of the graphics plumbing to using experimental packages. WARNING: this is
+hard to revert. Actually most people think it's impossible. They're wrong, but it doesn't make it
 any easier.
 
 
