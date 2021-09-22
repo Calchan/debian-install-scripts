@@ -1,3 +1,15 @@
+> […] playing jedi: fallen order (or whatever the name is)
+>
+> And man, without cmd line args the game runs at 15-30 fps, really unstable
+>
+> But `run-game %command%` brings it to stable 30 medium settings with less power than the first test
+
+_A happy GPD Win 3 user_
+
+(`run-game` is what enables the automatic game optimizations and optional frame rate capping to save
+power, read all about it below)
+
+
 # Debian install scripts
 
 These scripts help you setup a lean but full-featured Debian install that's easy to manage and
