@@ -242,17 +242,12 @@ version of your games even when a Linux version exists. Bad Linux ports are bad.
   governor improvements, FSYNC for Wine and Proton, etc…
 
 
-## Weird and experimental stuff
-
-Some of these scripts require adding the experimental repository to your APT sources. If you don't
-know how to do this you should not play with this. And even if you know you most likely don't want
-to either.
-
+## Supplemental scripts for exotic hardware
 
 ### `6-gpd-win2`
 
-The GPD Win 2 is a cute machine made of exotic hardware. This additional script fixes a lot of
-issues when installing Linux to it. Including:
+The GPD Win 2 is a cute but weird little machine. This additional script fixes a lot of issues when
+installing Linux to it. Including:
 
 - Rotated display (due to it being from a tablet)
 
@@ -312,17 +307,19 @@ The recommended list of scripts to use is:
 Once you reboot after the second part of the install process, all hardware should be functional and
 configured properly.
 
-Due to the weak CPU, using the `run-game` script (see below) is not recommended. GameMode plays with
-thread priorities and the CPU/GPU power balance to improve performance on a regular machine, but on
-the Win 2 it deprives the CPU from too much of its performance and heavy games end up having low and
-erratic frame rates. In Steam, simply use this for the launch options:
+Due to the weak CPU, the `run-game` script (see below) doesn't use GameMode. Our setup plays with
+thread priorities and the CPU/GPU power balance to improve performance, and does wonders on a
+regular machine, but on the Win 2 it deprives the CPU from too much of its performance and heavy
+games end up having low and erratic frame rates. I suspect the issue is with the I/O scheduler
+struggling. For the same reason, using kernels with patchsets like the CacULE CPU scheduler is not
+recommended on the Win 2.
 
-```
-mangohud %command%
-```
 
-The recommended Heroic setup doesn't use the `run-game` script so this isn't an issue. See the end
-of this document for how to set it up.
+## Experimental stuff
+
+Some of these scripts require adding the experimental repository to your APT sources. If you don't
+know how to do it you should not play with this. And even if you know you most likely don't want to
+either.
 
 
 ### `6-gaming-experimental.sh`
