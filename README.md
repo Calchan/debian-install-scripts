@@ -194,8 +194,8 @@ Just LibreOffice and Gimp with a few packages useful with them. Because I'm lazy
 
 ### `5-gaming-prep.sh`
 
-This will put your Windows partition to shame. You will quickly build the habit of using the Windows
-version of your games even when a Linux version exists. Bad Linux ports are bad.
+You will quickly make the habit of using the Windows version of your games even when a Linux build
+exists. It pains me to admit it, but bad Linux ports are bad. There are exceptions, obviously.
 
 - Apply the usual amount of sane minimal defaults.
 
@@ -249,15 +249,15 @@ version of your games even when a Linux version exists. Bad Linux ports are bad.
 The GPD Win 2 is a cute but weird little machine. This additional script fixes a lot of issues when
 installing Linux to it. Including:
 
-- Rotated display (due to it being from a tablet)
+- Display rotated in hardware, due to it being from a tablet
 
-- Rotated touchscreen (same reason)
+- Rotated touchscreen (same as above)
 
 - Flaky SD card interface
 
 - Not-quite compatible Xbox controller
 
-Due to the compact keyboard, the MangoHud keybinds are changed to:
+Because of the compact keyboard, the MangoHud keybinds are changed to:
 
 ```
 toggle_hud=Shift_R+F1
