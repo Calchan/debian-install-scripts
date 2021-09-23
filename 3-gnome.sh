@@ -6,7 +6,7 @@ apt install -y \
     gnome-shell \
     gnome-shell-extensions \
     nautilus \
-    pipewire-pulse libspa-0.2-bluetooth gstreamer1.0-pipewire \
+    pipewire-pulse pipewire-audio-client-libraries libspa-0.2-bluetooth gstreamer1.0-pipewire \
     totem gstreamer1.0-vaapi \
     eog \
     gnome-screenshot \
