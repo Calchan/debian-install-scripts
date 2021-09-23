@@ -12,9 +12,9 @@ power, read all about it below)
 
 # Debian install scripts
 
-These scripts help you setup a lean but full-featured Debian install that's easy to manage and
-maintain. They're split in multiple parts so you can pick and choose what you install. Just so you
-know, I use this on my work machines. It works.
+These scripts help you automatically set up a lean but full-featured Linux install that's easy to
+manage and maintain. They're split in multiple parts so you can pick and choose what you install.
+Just so you know, I use this on my work machines. It works.
 
 One of the optional scripts is to prepare your machine for gaming to a point it makes owning a
 Windows install useless. I have thousands of Windows games and, although I haven't tried them all,
@@ -22,9 +22,10 @@ all those I've tried worked without exception. Not only that but they typically 
 faster than on Windows. How about ~25fps in GTA5 at 720p on a dumb old Skylake laptop with
 integrated graphics?
 
-None of this is rocket science. Just a collection of settings, tricks, with a goal of simplicity and
-reproducibility. Some fixes also, like for example for GameMode. I don't know how people use it but
-some of it is broken out of the box. There are some convenience scripts too, read about them below.
+None of this is rocket science. Just a collection of settings and tricks, with a goal of simplicity
+and reproducibility. Some fixes also, like for example for GameMode. I don't know how people use it
+but some of it is broken out of the box. There are some convenience scripts too, read about them
+below.
 
 Finally, these scripts work well but they don't look as nice or clean as I would want it. They grew
 organically over the years and it shows. Patches welcome.
@@ -39,11 +40,10 @@ organically over the years and it shows. Patches welcome.
 and `dd` or `cp` it to a USB stick at least 1GB in size.
 
 3. Download the scripts in this repository and copy them to a FAT32-formatted USB stick. The Debian
-   image is read-only so you can't put the scripts on your first stick, but you can wipe it after
-   you've rebooted for the first time, reformat it to FAT32 and copy the scripts on it.
-   Alternatively, once you reboot for the second part of the install process (see below), you can do
-   this instead:
-
+   image is read-only so you can't put the scripts on your first stick. However, once you're done
+   with the first part (see below) and rebooted, you can reformat it to FAT32 and copy the scripts
+   to it using another machine. Alternatively, once rebooted after the first part you can do this
+   instead:
    ```
    apt install wget unzip
    wget https://github.com/Calchan/debian-install-scripts/archive/refs/heads/master.zip
