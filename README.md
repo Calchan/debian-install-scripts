@@ -14,7 +14,7 @@ power, read all about it below)
 
 These scripts help you automatically set up a lean but full-featured Linux install that's easy to
 manage and maintain. They're split in multiple parts so you can pick and choose what you install.
-Just so you know, I use this on my work machines. It works.
+Just so you know, I use this on my work laptop and gaming desktop. It works.
 
 One of the optional scripts is to prepare your machine for gaming to a point it makes owning a
 Windows install useless. I have thousands of Windows games and, although I haven't tried them all,
@@ -276,7 +276,7 @@ because the Win 2 is notoriously bad at WiFi. Move close to your AP and put your
 table instead of holding it in your hands, since the antennae are where you hold it. You can use the
 SD card reader to clone this repository to, but as far as I know you can't boot from it.
 
-When booting the install Debian ISO, scroll to your preferred entry in the GRUB menu (graphical,
+When booting the Debian install ISO, scroll to your preferred entry in the GRUB menu (graphical,
 text-mode, etc…), press E to edit the GRUB configuration for that entry, and add the following to
 the kernel command-line parameters:
 ```
@@ -328,7 +328,7 @@ upload_log=Shift_L+6
 Frame rate is capped at 30fps by default. Press Shift_L+9 to cycle to 60fps or unlimited, and
 Shift_L+0 to toggle the HUD on and off.
 
-When booting the install Debian ISO, scroll to your preferred entry in the GRUB menu (graphical,
+When booting the Debian install ISO, scroll to your preferred entry in the GRUB menu (graphical,
 text-mode, etc…), press E to edit the GRUB configuration for that entry, and add the following to
 the kernel command-line parameters:
 ```
@@ -411,16 +411,26 @@ It sets a bunch of variables and starts GameMode and MangoHud automatically.
 
 It doesn't include the Wine executable though, so you can choose which one you want or use it with a
 native game. Example:
-
 ```
 run-game wine hl3.exe
 ```
 
 In Steam you can set your game's launch options (in the Properties… → GENERAL menu) to:
-
 ```
 run-game %command%
 ```
+
+You can also switch resolutions when you want to use borderless windows (often recommended on Intel
+GPUs) at less than native resolution but still want it full screen. This is for example how I start
+Skyrim SE on my GPD Win 2:
+```
+xrandr -s 504x896; run-game %command%; xrandr -s 720x1280
+```
+
+It sets the resolution to 896x504 (x and y are inverted with `xrandr` due to the rotated display,
+see above) then resets it to native resolution when the game exits. Note that in this particular
+case you also need to manually set the resolution in the game's config file to 896x504 (not
+inverted) because the UI won't list this specific resolution.
 
 
 ## Miscellaneous
@@ -448,7 +458,6 @@ one individually for games which need it).
 
 Set the content of "Advanced Options (Environment
 Variables)" to:
-
 ```WINEESYNC=1 WINEFSYNC=1```
 
 You should use a different Wine prefix for each game. I create a `.wine` directory at the top of
