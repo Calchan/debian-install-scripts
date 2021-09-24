@@ -258,7 +258,6 @@ installing Linux to it. Including:
 - Not-quite compatible Xbox controller
 
 Because of the compact keyboard, the MangoHud keybinds are changed to:
-
 ```
 toggle_hud=Shift_R+F1
 toggle_fps_limit=Shift_R+F2
@@ -280,7 +279,6 @@ SD card reader to clone this repository to, but as far as I know you can't boot 
 When booting the install Debian ISO, scroll to your preferred entry in the GRUB menu (graphical,
 text-mode, etc…), press E to edit the GRUB configuration for that entry, and add the following to
 the kernel command-line parameters:
-
 ```
 video=eDP-1:panel_orientation=right_side_up sdhci.debug_quirks=0x40 sdhci.debug_quirks2=0x04
 ```
@@ -313,6 +311,46 @@ regular machine, but on the Win 2 it deprives the CPU from too much of its perfo
 games end up having low and erratic frame rates. I suspect the issue is with the I/O scheduler
 struggling. For the same reason, using kernels with patchsets like the CacULE CPU scheduler is not
 recommended on the Win 2.
+
+
+### `6-gpd-win3`
+
+The GPD Win 3 is more modern than the Win 2 above. The only things which need fixing are the rotated
+display and touchscreen. Because of the sub-optimal keyboard, the MangoHud keybinds are changed to:
+```
+toggle_hud=Shift_L+0
+toggle_fps_limit=Shift_L+9
+toggle_logging=Shift_L+7
+reload_cfg=Shift_L+8
+upload_log=Shift_L+6
+```
+
+Frame rate is capped at 30fps by default. Press Shift_L+9 to cycle to 60fps or unlimited, and
+Shift_L+0 to toggle the HUD on and off.
+
+When booting the install Debian ISO, scroll to your preferred entry in the GRUB menu (graphical,
+text-mode, etc…), press E to edit the GRUB configuration for that entry, and add the following to
+the kernel command-line parameters:
+```
+video=DSI-1:panel_orientation=right_side_up
+```
+
+The recommended list of scripts to use is:
+
+- `1-initial-cleanup.sh`
+
+- `2-base.sh`
+
+- `3-xfce.sh`
+
+- `4-intel-drivers.sh`
+
+- `5-gaming-prep.sh`
+
+- `6-gpd-win3`
+
+Unlike with the Win 2, the `run-game` script does not disable GameMode since the CPU is strong
+enough.
 
 
 ## Experimental stuff
