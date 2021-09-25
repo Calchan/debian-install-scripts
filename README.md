@@ -315,8 +315,9 @@ recommended on the Win 2.
 
 ### `6-gpd-win3`
 
-The GPD Win 3 is more modern than the Win 2 above. The only things which need fixing are the rotated
-display and touchscreen. Because of the sub-optimal keyboard, the MangoHud keybinds are changed to:
+The GPD Win 3 is more modern than the Win 2 above. The only things which need fixing are sound,
+rotated display, and touchscreen. Because of the sub-optimal keyboard, the MangoHud keybinds are
+changed to:
 ```
 toggle_hud=Shift_L+0
 toggle_fps_limit=Shift_L+9
@@ -325,8 +326,8 @@ reload_cfg=Shift_L+8
 upload_log=Shift_L+6
 ```
 
-Frame rate is capped at 30fps by default. Press Shift_L+9 to cycle to 60fps or unlimited, and
-Shift_L+0 to toggle the HUD on and off.
+Frame rate is capped at 30fps by default. Press `Shift_L+9` to cycle to 60fps or unlimited, and
+`Shift_L+0` to toggle the HUD on and off.
 
 When booting the Debian install ISO, scroll to your preferred entry in the GRUB menu (graphical,
 text-mode, etc…), press E to edit the GRUB configuration for that entry, and add the following to
