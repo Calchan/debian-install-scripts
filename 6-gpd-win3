@@ -10,7 +10,6 @@ for file in $(find * -type f); do
     cp -f "${file}" "/${file}"
     chmod 644 "/${file}"
 done
-chmod +x /usr/local/bin/*
 popd > /dev/null
 
 cd configs/gpd-win3/user
