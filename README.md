@@ -305,13 +305,6 @@ The recommended list of scripts to use is:
 Once you reboot after the second part of the install process, all hardware should be functional and
 configured properly.
 
-Due to the weak CPU, the `run-game` script (see below) doesn't use GameMode. Our setup plays with
-thread priorities and the CPU/GPU power balance to improve performance, and does wonders on a
-regular machine, but on the Win 2 it deprives the CPU from too much of its performance and heavy
-games end up having low and erratic frame rates. I suspect the issue is with the I/O scheduler
-struggling. For the same reason, using kernels with patchsets like the CacULE CPU scheduler is not
-recommended on the Win 2.
-
 
 ### `6-gpd-win3`
 
@@ -349,9 +342,6 @@ The recommended list of scripts to use is:
 - `5-gaming-prep.sh`
 
 - `6-gpd-win3`
-
-Unlike with the Win 2, the `run-game` script does not disable GameMode since the CPU is strong
-enough.
 
 
 ## Experimental stuff
@@ -459,7 +449,7 @@ one individually for games which need it).
 
 Set the content of "Advanced Options (Environment
 Variables)" to:
-```WINEESYNC=1 WINEFSYNC=1```
+```WINEFSYNC=1```
 
 You should use a different Wine prefix for each game. I create a `.wine` directory at the top of
 each game directory.
