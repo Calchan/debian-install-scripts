@@ -5,9 +5,10 @@ set -e
 dpkg --add-architecture i386
 apt update
 
-apt install -y dxvk ttf-mscorefonts-installer winbind gamemode mangohud:amd64 mangohud:i386 wine wine-development steam \
+apt install -y ttf-mscorefonts-installer winbind gamemode mangohud:amd64 mangohud:i386 wine steam \
     gstreamer1.0-gl gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
-    gstreamer1.0-gl:i386 gstreamer1.0-libav:i386 gstreamer1.0-plugins-bad:i386 gstreamer1.0-plugins-ugly:i386
+    gstreamer1.0-gl:i386 gstreamer1.0-libav:i386 gstreamer1.0-plugins-bad:i386 \
+    gstreamer1.0-plugins-ugly:i386
 apt purge -y xterm
 
 for userdir in /home/*; do

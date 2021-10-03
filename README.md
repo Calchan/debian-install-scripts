@@ -201,10 +201,10 @@ exists. It pains me to admit it, but bad Linux ports are bad. There are exceptio
   packages as your favorite Wine implementations. Proton Experimental should be your default. Go
   back in major versions one at a time if Experimental doesn't work but it will be rare.
 
-- Install good old Wine, both `wine` and `wine-development`, for those old games which won't work
-  with Proton. DXVK is also installed but will only work with `wine-development` at this time. MS
-  core fonts and `winbind` are also installed since they're often needed. Remember to use
-  `winetricks` and `dxvk-setup` as needed.
+- Install good old Wine for those old games which won't work with Proton. Mainline Wine doesn't
+  support DXVK at the moment, so use the Proton Experimental binaries you download from Steam. It
+  should be your default anyway, and for a lot of reasons. If you really need DXVK and Wine then you
+  will have to switch your APT sources to unstable and install it along with `wine-development`.
 
 - Upstream `winetricks` is installed. Versions from your distribution, whichever it is, can't keep
   up with the update pace. And out-of-date versions of `winetricks` will be unable to install a lot
