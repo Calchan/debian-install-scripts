@@ -106,10 +106,6 @@ It's hard to imagine a use case for using `1-initial-cleanup.sh` alone though. A
 stop after `2-base.sh` you'll have to figure out networking on your own, but it's a viable final
 destination for a server.
 
-Note that your APT sources will be switched to unstable in the process. Stop complaining, it works,
-and you'll be amazed at how stable it is. You did read the part about me using this on my work
-machines, right?
-
 
 ### `1-initial-cleanup.sh`
 
