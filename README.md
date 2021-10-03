@@ -174,6 +174,8 @@ in place of the free ones. Free as in speech, of course.
 
 You probably don't need Japanese input. I do.
 
+The default binding to switch keyboards is `Win+Space`.
+
 
 #### `4-kubernetes.sh`
 
@@ -434,8 +436,7 @@ not for your games).
 In Settings → Steam Play, check "Enable Steam Play for all other titles" and select Proton
 Experimental in the list just below.
 
-Download the Proton Experimental package by searching for it in your library. You'll need it it
-below.
+Download the Proton Experimental package by searching for it in your library. You'll need it below.
 
 
 ### Heroic games launcher
