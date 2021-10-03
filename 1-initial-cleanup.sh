@@ -2,7 +2,10 @@
 
 set -e
 
-echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" > /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian testing main contrib non-free" > /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian-security/ testinig-security main contrib non-free" >> /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian testing-updates main contrib non-free" >> /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian testing-backports main contrib non-free" >> /etc/apt/sources.list
 apt update
 
 apt purge -y installation-report nano vim-tiny vim-common
