@@ -148,6 +148,10 @@ WARNING. At the time of this writing the Gnome script is unfinished and still a 
 You should be able to safely reboot and have network after this stage. A double check you have the
 appropriate drivers and firmware won't hurt though.
 
+Note that sometimes the NetworkManager icon will not show up in your taskbar for unknown reasons. In
+this case, just run `nmtui` in a terminal and activate your connection. This only happens on your
+first connection, so you should never have to do that again.
+
 
 ### Optional stuff
 
