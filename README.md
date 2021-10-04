@@ -201,16 +201,16 @@ exists. It pains me to admit it, but bad Linux ports are bad. There are exceptio
 
 - Apply the usual amount of sane minimal defaults.
 
-- Install the i386 architecture, still needed for a lot of games and store launchers.
+- APT sources are switched to `sid` to get the latest graphics stack. It's fine, don't worry.
 
-- Install the Steam client. Even if you don't use it for games (really?) you should use its Proton
-  packages as your favorite Wine implementations. Proton Experimental should be your default. Go
-  back in major versions one at a time if Experimental doesn't work but it will be rare.
+- Add the i386 architecture, still needed for a lot of games and store launchers.
 
-- Install good old Wine for those old games which won't work with Proton. Mainline Wine doesn't
-  support DXVK at the moment, so use the Proton Experimental binaries you download from Steam. It
-  should be your default anyway, and for a lot of reasons. If you really need DXVK and Wine then you
-  will have to switch your APT sources to unstable and install it along with `wine-development`.
+- Install the Steam client. Even if you don't use it for its games (really?) you should use its
+  Proton packages as your favorite Wine implementations. Proton Experimental should be your default.
+  Go back in major versions one at a time if Experimental doesn't work but it will be rare.
+
+- Install good old Wine for those old games which won't work with Proton. If you really need DXVK in
+  vanilla Wine then you will have to install it along with `wine-development`.
 
 - Upstream `winetricks` is installed. Versions from your distribution, whichever it is, can't keep
   up with the update pace. And out-of-date versions of `winetricks` will be unable to install a lot

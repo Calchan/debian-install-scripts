@@ -2,8 +2,10 @@
 
 set -e
 
+echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" > /etc/apt/sources.list
 dpkg --add-architecture i386
 apt update
+apt full-upgrade -y
 
 apt install -y ttf-mscorefonts-installer winbind gamemode mangohud:amd64 mangohud:i386 wine steam \
     gstreamer1.0-gl gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
