@@ -15,6 +15,7 @@ apt install -y \
     lsb-release \
     man \
     powerline powerline-gitstatus \
+    pyhton-is-python3 \
     sudo \
     tmux \
     vim-addon-manager vim-nox \
