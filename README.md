@@ -35,8 +35,8 @@ organically over the years and it shows. Patches welcome.
 
 1. Read these instructions entirely and carefully.
 
-2. Download
-[this ISO image](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.0.0+nonfree/amd64/iso-cd/firmware-11.0.0-amd64-netinst.iso)
+2. Download the non-edu ISO image from
+[this directory](https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/)
 and `dd` or `cp` it to a USB stick at least 1GB in size.
 
 3. Download the scripts in this repository and copy them to a FAT32-formatted USB stick. The Debian
