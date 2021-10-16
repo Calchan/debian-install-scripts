@@ -2,7 +2,6 @@
 
 set -e
 
-echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" > /etc/apt/sources.list
 dpkg --add-architecture i386
 apt update
 apt upgrade -y
@@ -57,3 +56,7 @@ wget -qO - https://dl.xanmod.org/gpg.key | apt-key --keyring /etc/apt/trusted.gp
 apt update
 apt install -y linux-xanmod
 apt autoremove -y
+
+echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" > /etc/apt/sources.list
+apt update
+apt upgrade -y
