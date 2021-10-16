@@ -10,7 +10,6 @@ apt install -y ttf-mscorefonts-installer winbind gamemode mangohud:amd64 mangohu
     gstreamer1.0-gl gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
     gstreamer1.0-gl:i386 gstreamer1.0-libav:i386 gstreamer1.0-plugins-bad:i386 \
     gstreamer1.0-plugins-ugly:i386
-apt purge -y xterm
 
 for userdir in /home/*; do
     mkdir -p "${userdir}/.config/systemd/user/default.target.wants"
@@ -55,8 +54,9 @@ echo 'deb http://deb.xanmod.org releases main' > /etc/apt/sources.list.d/xanmod-
 wget -qO - https://dl.xanmod.org/gpg.key | apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
 apt update
 apt install -y linux-xanmod
-apt autoremove -y
 
 echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" > /etc/apt/sources.list
 apt update
 apt upgrade -y
+apt purge -y ibus xterm yelp
+apt autoremove -y
