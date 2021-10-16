@@ -12,10 +12,10 @@ apt install -y \
     gnome-screenshot \
     gnome-calculator \
     file-roller unrar unzip \
+    tilix \
     libopenblas-base
 apt purge -y ibus yelp termit xterm
 apt autoremove -y
-apt install -y gnome-terminal
 
 rm -f /etc/network/interfaces
 cd configs/gnome
