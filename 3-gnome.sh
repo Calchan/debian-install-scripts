@@ -4,6 +4,7 @@ set -e
 
 apt install -y \
     gnome-shell \
+    gnome-tweaks \
     gnome-shell-extensions \
     nautilus \
     pipewire-pulse pipewire-audio-client-libraries libspa-0.2-bluetooth gstreamer1.0-pipewire \
