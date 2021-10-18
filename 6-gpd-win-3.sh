@@ -4,7 +4,7 @@ set -e
 
 apt install -y xboxdrv
 
-pushd configs/gpd-win3/root > /dev/null
+pushd configs/gpd-win-3/root > /dev/null
 for file in $(find * -type f); do
     mkdir -p "$(dirname "/${file}")"
     cp -f "${file}" "/${file}"
@@ -12,7 +12,7 @@ for file in $(find * -type f); do
 done
 popd > /dev/null
 
-cd configs/gpd-win3/user
+cd configs/gpd-win-3/user
 for userdir in /home/*; do
     for file in $(find . -type f); do
         mkdir -p "$(dirname "${userdir}/${file}")"

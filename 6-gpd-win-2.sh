@@ -4,7 +4,7 @@ set -e
 
 apt install -y xboxdrv
 
-pushd configs/gpd-win2/root > /dev/null
+pushd configs/gpd-win-2/root > /dev/null
 for file in $(find * -type f); do
     mkdir -p "$(dirname "/${file}")"
     cp -f "${file}" "/${file}"
@@ -15,7 +15,7 @@ mkdir -p /etc/systemd/system/graphical.target.wants
 ln -sf /etc/systemd/system/add-xpad-id.service /etc/systemd/system/graphical.target.wants/add-xpad-id.service
 popd > /dev/null
 
-cd configs/gpd-win2/user
+cd configs/gpd-win-2/user
 for userdir in /home/*; do
     for file in $(find . -type f); do
         mkdir -p "$(dirname "${userdir}/${file}")"

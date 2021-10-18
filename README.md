@@ -246,7 +246,7 @@ exists. It pains me to admit it, but bad Linux ports are bad. There are exceptio
 
 ## Supplemental scripts for exotic hardware
 
-### `6-gpd-win2`
+### `6-gpd-win-2.sh`
 
 The GPD Win 2 is a cute but weird little machine. This additional script fixes a lot of issues when
 installing Linux to it. Including:
@@ -302,13 +302,13 @@ The recommended list of scripts to use is:
 
 - `5-gaming-prep.sh`
 
-- `6-gpd-win2`
+- `6-gpd-win-2.sh`
 
 Once you reboot after the second part of the install process, all hardware should be functional and
 configured properly.
 
 
-### `6-gpd-win3`
+### `6-gpd-win-3.sh`
 
 The GPD Win 3 is more modern than the Win 2 above. The only things which need fixing are sound,
 rotated display, and touchscreen. Because of the sub-optimal keyboard, the MangoHud keybinds are
@@ -343,7 +343,7 @@ The recommended list of scripts to use is:
 
 - `5-gaming-prep.sh`
 
-- `6-gpd-win3`
+- `6-gpd-win-3.sh`
 
 
 ## Experimental stuff
