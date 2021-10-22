@@ -45,9 +45,8 @@ and `dd` or `cp` it to a USB stick at least 1GB in size.
    to it using another machine. Alternatively, once rebooted after the first part you can do this
    instead:
    ```
-   apt install wget unzip
-   wget https://github.com/Calchan/debian-install-scripts/archive/refs/heads/master.zip
-   unzip master.zip
+   apt install git
+   git clone https://github.com/Calchan/debian-install-scripts
    ```
 
 4. Wired networking is recommended. Either ethernet, or a USB-to-ethernet adapter. I always use a
