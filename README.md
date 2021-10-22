@@ -373,7 +373,7 @@ dependencies. `1-initial-cleanup.sh` does that at the very beginning of the inst
 doing it any later than that is of dubious use and surely a bad idea.
 
 
-## Convenience scripts
+## Gaming utilities
 
 They're all installed in `/usr/local/bin` so they're all available in your PATH and out of the way
 of the package manager.
@@ -383,6 +383,15 @@ of the package manager.
 
 This is part of the fixes for GameMode and MangoHud. It's automatically started by a systemd
 service. You will never have to use this manually or even update it.
+
+
+### `update-gamescope`
+
+This builds Valve's `gamescope` straight from their git repository. This script uses Docker to avoid
+a hell of build dependencies sticking around on your system, so make sure you run the `4-docker.sh`
+script during installation (or later, that's fine too). Due to this, and that only Wayland users
+really need it, `gamescope` is not installed by default, so just run it as root when you need to
+install or update it.
 
 
 ### `update-heroic`
