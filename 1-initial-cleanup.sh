@@ -5,6 +5,7 @@ set -e
 echo "deb http://deb.debian.org/debian testing main contrib non-free" > /etc/apt/sources.list
 echo "deb http://deb.debian.org/debian-security/ testing-security main contrib non-free" >> /etc/apt/sources.list
 echo "deb http://deb.debian.org/debian testing-updates main contrib non-free" >> /etc/apt/sources.list
+dhclient
 apt update
 
 apt purge -y installation-report nano vim-tiny vim-common

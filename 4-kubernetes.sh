@@ -8,5 +8,7 @@ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https:/
 wget -qO - https://baltocdn.com/helm/signing.asc | apt-key add -
 echo "deb https://baltocdn.com/helm/stable/debian/ all main" > /etc/apt/sources.list.d/helm-stable-debian.list
 
+dhclient
 apt update
+dhclient
 apt install -y kubectl kubectx helm

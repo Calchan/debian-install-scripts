@@ -3,9 +3,12 @@
 set -e
 
 dpkg --add-architecture i386
+dhclient
 apt update
+dhclient
 apt upgrade -y
 
+dhclient
 apt install -y ttf-mscorefonts-installer winbind gamemode mangohud:amd64 mangohud:i386 wine steam \
     gstreamer1.0-gl gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
     gstreamer1.0-gl:i386 gstreamer1.0-libav:i386 gstreamer1.0-plugins-bad:i386 \
@@ -52,11 +55,15 @@ cd /tmp
 /usr/local/bin/update-heroic
 echo 'deb http://deb.xanmod.org releases main' > /etc/apt/sources.list.d/xanmod-kernel.list
 wget -qO - https://dl.xanmod.org/gpg.key | apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
+dhclient
 apt update
+dhclient
 apt install -y linux-xanmod
 
 echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" > /etc/apt/sources.list
+dhclient
 apt update
+dhclient
 apt upgrade -y
 apt purge -y ibus xterm yelp
 apt autoremove -y

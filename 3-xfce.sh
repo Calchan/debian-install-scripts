@@ -2,6 +2,7 @@
 
 set -e
 
+dhclient
 apt install -y \
     xfce4 \
     elementary-xfce-icon-theme \
@@ -28,6 +29,7 @@ apt purge -y ibus termit xterm
 apt autoremove -y
 
 # Install separately so as to not provide a dumb X session
+dhclient
 apt install -y xfce4-terminal
 
 # Remove the networking setup from the initial install since it may conflict with NetworkManager
@@ -57,4 +59,5 @@ done
 
 cd /tmp
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+dhclient
 apt install -y ./google-chrome-stable_current_amd64.deb

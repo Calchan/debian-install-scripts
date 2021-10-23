@@ -4,6 +4,7 @@ set -e
 
 echo "DSELECT::Clean \"always\";" > /etc/apt/apt.conf.d/99autoclean
 
+dhclient
 apt install -y \
     apt-transport-https \
     bash-completion \

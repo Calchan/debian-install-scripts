@@ -2,6 +2,7 @@
 
 set -e
 
+dhclient
 apt install -y xboxdrv
 
 pushd configs/gpd-win-2/root > /dev/null
