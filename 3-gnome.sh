@@ -28,6 +28,7 @@ for file in $(find * -type f); do
 done
 
 cd /tmp
+dhclient
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 dhclient
 apt install -y ./google-chrome-stable_current_amd64.deb

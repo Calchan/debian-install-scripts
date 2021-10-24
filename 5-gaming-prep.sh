@@ -31,6 +31,7 @@ for file in $(find * -type f); do
     chmod 644 "/${file}"
 done
 cd /usr/local/bin
+dhclient
 wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
 chmod +x *
 mkdir -p /etc/systemd/system/graphical.target.wants
@@ -54,6 +55,7 @@ done
 cd /tmp
 /usr/local/bin/update-heroic
 echo 'deb http://deb.xanmod.org releases main' > /etc/apt/sources.list.d/xanmod-kernel.list
+dhclient
 wget -qO - https://dl.xanmod.org/gpg.key | apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
 dhclient
 apt update
