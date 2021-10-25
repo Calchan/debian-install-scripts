@@ -29,3 +29,5 @@ for userdir in /home/*; do
     username=$(basename "${userdir}")
     chown -R "${username}":"${username}" "${userdir}"
 done
+
+update-grub
