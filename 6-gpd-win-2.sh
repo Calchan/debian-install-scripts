@@ -3,7 +3,7 @@
 set -e
 
 dhclient
-apt install -y xboxdrv
+apt install -y --no-install-recommends xboxdrv
 
 pushd configs/gpd-win-2/root > /dev/null
 for file in $(find * -type f); do
