@@ -336,7 +336,7 @@ The recommended list of scripts to use is:
 
 - `2-base.sh`
 
-- `3-xfce.sh`
+- `3-gnome.sh`
 
 - `4-intel-drivers.sh`
 
@@ -391,6 +391,9 @@ a hell of build dependencies sticking around on your system, so make sure you ru
 script during installation (or later, that's fine too). Due to this, and that only Wayland users
 really need it, `gamescope` is not installed by default, so just run it as root when you need to
 install or update it.
+
+Note that `gamescope` only really makes sense with Wayland, meaning when installing `3-gnome.sh`
+instead of `3-xfce.sh`.
 
 
 ### `update-heroic`
