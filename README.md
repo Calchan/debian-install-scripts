@@ -58,7 +58,7 @@ and `dd` or `cp` it to a USB stick at least 1GB in size.
    (it's the one or one of those starting with `wl`). Finally, run:
    ```
    wpa_passphrase '<your WiFi SSID> '<your WiFi passphrase>' > /tmp/wpa
-   wpa_supplicant -c /tmp/wpa -i <your WiFi interface>
+   wpa_supplicant -c /tmp/wpa -i <your WiFi interface> &
    dhclient
    ```
    If it doesn't work then RTFM or just use wired networking like recommended above.  Once the
