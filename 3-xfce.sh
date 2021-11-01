@@ -10,7 +10,6 @@ apt install -y \
     xfce4-notifyd \
     xfce4-power-manager \
     network-manager-gnome \
-    pipewire-pulse pipewire-audio-client-libraries gstreamer1.0-pipewire \
     blueman libspa-0.2-bluetooth \
     xfce4-screenshooter \
     tumbler-plugins-extra \
