@@ -229,6 +229,10 @@ exists. It pains me to admit it, but bad Linux ports are bad. There are exceptio
   workaround and suggestions for other solutions, but no reaction so far. A complete fix is
   automatically applied with this script.
 
+- Add a script to install gamescope. Note that it's not installed by default since it's only useful
+  with Wayland. Gamescope also enables the use of AMD's FSR in all games. See the gaming utilities
+  section below for more information.
+
 - MangoHud is installed with a suitable configuration to monitor frame rate, CPU/GPU load, etc…, and
   control frame rate. There's also a permission fix similar to the one above. It's pre-configured to
   allow you to cap the frame rate just like the Steam Deck will supposedly do. Use Shift_R+F12 to
@@ -241,6 +245,8 @@ exists. It pains me to admit it, but bad Linux ports are bad. There are exceptio
   games every week you should have a fair number of them by now, some of them very good. Make sure
   you use Steam's Proton packages as your Wine implementation. None of the Epic games are old enough
   to require vanilla Wine.
+
+- Install Lutris for GOG and third-party games.
 
 - Install the Xanmod kernel. It's more recent than what's packaged (usually necessary for Intel and
   AMD graphics), and contains a few interesting patches for gaming such as interactivity and
@@ -458,8 +464,14 @@ service. You will never have to use this manually or even update it.
 This builds Valve's `gamescope` straight from their git repository. This script uses Docker to avoid
 a hell of build dependencies sticking around on your system, so make sure you run the `4-docker.sh`
 script during installation (or later, that's fine too). Due to this, and that only Wayland users
-really need it, `gamescope` is not installed by default, so just run it as root when you need to
-install or update it.
+really need it, `gamescope` is not installed by default, so just run this script as root when you
+need to install or update it.
+
+You can use gamescope in Steam by adding something like this on your launch options:
+```gamescope -f -w 1024 -h 576 run-game %command%```
+Or, if you want to add FSR to the mix:
+```WINE_FULLSCREEN_FSR=1 gamescope -f -w 896 -h 504 run-game %command%```
+(make sure to change the `-w` and `-h` values to the width and height of your desired resolution)
 
 Note that `gamescope` only really makes sense with Wayland, meaning when installing `3-gnome.sh`
 instead of `3-xfce.sh`.
