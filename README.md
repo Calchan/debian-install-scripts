@@ -45,6 +45,7 @@ and `dd` or `cp` it to a USB stick at least 1GB in size.
    to it using another machine. Alternatively, once rebooted after the first part you can do this
    instead:
    ```
+   cd /tmp
    apt install git
    git clone https://github.com/Calchan/debian-install-scripts
    ```
