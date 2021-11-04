@@ -148,8 +148,6 @@ whose ID is 1000 will be able to sudo root. Add more sudo users manually as need
 Here you get a choice of XFCE and Gnome, so run either `3-xfce.sh` or `3-gnome.sh` respectively, not
 both.
 
-WARNING. At the time of this writing the Gnome script is unfinished and still a work in progress.
-
 You should be able to safely reboot and have network after this stage. A double check you have the
 appropriate drivers and firmware won't hurt though.
 
