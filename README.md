@@ -62,7 +62,12 @@ and `dd` or `cp` it to a USB stick at least 1GB in size.
    wpa_supplicant -c /tmp/wpa -i <your WiFi interface> &
    dhclient
    ```
-   If it doesn't work then RTFM or just use wired networking like recommended above.  Once the
+   It's not unlikely your connection will drop multiple times (some scripts require _a lot of_
+   downloads). Watch the output of the scripts and if any error occurs just restart the script until
+   it no longer shows any error before you move to the next one. All scripts are written so that
+   they will renegotiate with your WiFi AP when necessary, although that too is not completely
+   fail-proof.
+   If it doesn't work then RTFM or just use wired networking like recommended above. Once the
    installation is complete you'll be able to use WiFi just fine, obviously.
 
 
@@ -246,10 +251,68 @@ exists. It pains me to admit it, but bad Linux ports are bad. There are exceptio
 
 ## Supplemental scripts for exotic hardware
 
+### `6-gpd-win-1.sh`
+
+WARNING. This is a work in progress. Sound will not work when using Proton, but will work outside of
+that.
+
+This additional script fixes a lot of issues when installing Linux to the original GPD Win.
+Including:
+
+- Display rotated in hardware, due to it being from a tablet
+
+- Rotated touchscreen (same as above)
+
+Because of the compact keyboard and proximity of the Shift and Fn keys, the MangoHud keybinds are
+changed to:
+```
+toggle_hud=Shift_L+F12
+toggle_fps_limit=Shift_L+F11
+toggle_logging=Shift_L+F9
+reload_cfg=Shift_L+F10
+upload_log=Shift_L+F8
+```
+
+XFCE is the recommended DE to install because Gnome eats way too many CPU cycles for such a small
+device. XFCE settings have been adapted to make it easier to read on this small display and use the
+touchscreen.
+
+Using WiFi like described above for both parts of the install process is not a bad idea due to the
+low amount of ports. It's still recommended to use wired networking (with a USB hub for example).
+
+When booting the Debian install ISO, scroll to your preferred entry in the GRUB menu (graphical,
+text-mode, etc…), press E to edit the GRUB configuration for that entry, and add the following to
+the kernel command-line parameters:
+```
+video=DSI-1:panel_orientation=right_side_up
+```
+
+Triple-check it to make sure you typed it right, especially on this keyboard. The first parameter is
+to rotate the screen for the second part of the install process. The first part will still happen
+sideways. The last two parameters are to fix the SD card interface. Even if you don't use it, it
+will throw errors which may end up causing random reboots during the installation.
+
+The recommended list of scripts to use is:
+
+- `1-initial-cleanup.sh`
+
+- `2-base.sh`
+
+- `3-xfce.sh`
+
+- `4-intel-drivers.sh`
+
+- `5-gaming-prep.sh`
+
+- `6-gpd-win-1.sh`
+
+Once you reboot after the second part of the install process, all hardware should be functional and
+configured properly.
+
+
 ### `6-gpd-win-2.sh`
 
-The GPD Win 2 is a cute but weird little machine. This additional script fixes a lot of issues when
-installing Linux to it. Including:
+This additional script fixes a lot of issues when installing Linux to the GPD Win 2. Including:
 
 - Display rotated in hardware, due to it being from a tablet
 
@@ -310,9 +373,16 @@ configured properly.
 
 ### `6-gpd-win-3.sh`
 
-The GPD Win 3 is more modern than the Win 2 above. The only things which need fixing are sound,
-rotated display, and touchscreen. Because of the sub-optimal keyboard, the MangoHud keybinds are
-changed to:
+This additional script fixes a lot of issues when installing Linux to the GPD Win 2. Including:
+The only things which need fixing are sound,
+
+- Display rotated in hardware, due to it being from a tablet
+
+- Rotated touchscreen (same as above)
+
+- Sound
+
+Because of the sub-optimal keyboard, the MangoHud keybinds are changed to:
 ```
 toggle_hud=Shift_L+0
 toggle_fps_limit=Shift_L+9
