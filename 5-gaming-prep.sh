@@ -12,7 +12,7 @@ dhclient
 apt install -y ttf-mscorefonts-installer winbind gamemode mangohud:amd64 mangohud:i386 wine steam \
     lutris gstreamer1.0-gl gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
     gstreamer1.0-gl:i386 gstreamer1.0-libav:i386 gstreamer1.0-plugins-bad:i386 \
-    gstreamer1.0-plugins-ugly:i386
+    gstreamer1.0-plugins-ugly:i386 libaio1
 
 for userdir in /home/*; do
     mkdir -p "${userdir}/.config/systemd/user/default.target.wants"
@@ -54,9 +54,10 @@ done
 
 cd /tmp
 /usr/local/bin/update-heroic
-echo 'deb http://deb.xanmod.org releases main' > /etc/apt/sources.list.d/xanmod-kernel.list
+/usr/local/bin/update-retroarch
 dhclient
 wget -qO - https://dl.xanmod.org/gpg.key | apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
+echo 'deb http://deb.xanmod.org releases main' > /etc/apt/sources.list.d/xanmod-kernel.list
 dhclient
 apt update
 dhclient

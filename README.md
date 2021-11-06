@@ -212,6 +212,16 @@ exists. It pains me to admit it, but bad Linux ports are bad. There are exceptio
   Proton packages as your favorite Wine implementations. Proton Experimental should be your default.
   Go back in major versions one at a time if Experimental doesn't work but it will be rare.
 
+- Install the Heroic games launcher. This is an alternative to the bloated Epic launcher. It works
+  great and is full of useful conveniences. If you've been obediently redeeming these free Epic
+  games every week you should have a fair number of them by now, some of them very good. Make sure
+  you use Steam's Proton packages as your Wine implementation. None of the Epic games are old enough
+  to require vanilla Wine.
+
+- Install Lutris for GOG and third-party games.
+
+- Install RetroArch straight from retroarch.com so you always have the latest version.
+
 - Install good old Wine for those old games which won't work with Proton. If you really need DXVK in
   vanilla Wine then you will have to install it along with `wine-development`.
 
@@ -239,14 +249,6 @@ exists. It pains me to admit it, but bad Linux ports are bad. There are exceptio
   toggle the HUD on and Shift_L+F1 to cycle the FPS cap (unlimited by default, then 60fps, then
   30fps). Use Shift_L+F2 to toggle logging on and off. Note that sometimes, on 32-bit games, not all
   stats will show, and the next time they will. MangoHud is somewhat erratic in 32-bit.
-
-- Install the Heroic games launcher. This is an alternative to the bloated Epic launcher. It works
-  great and is full of useful conveniences. If you've been obediently redeeming these free Epic
-  games every week you should have a fair number of them by now, some of them very good. Make sure
-  you use Steam's Proton packages as your Wine implementation. None of the Epic games are old enough
-  to require vanilla Wine.
-
-- Install Lutris for GOG and third-party games.
 
 - Install the Xanmod kernel. It's more recent than what's packaged (usually necessary for Intel and
   AMD graphics), and contains a few interesting patches for gaming such as interactivity and
@@ -377,7 +379,7 @@ configured properly.
 
 ### `6-gpd-win-3.sh`
 
-This additional script fixes a lot of issues when installing Linux to the GPD Win 2. Including:
+This additional script fixes a lot of issues when installing Linux to the GPD Win 3. Including:
 The only things which need fixing are sound,
 
 - Display rotated in hardware, due to it being from a tablet
@@ -482,6 +484,12 @@ instead of `3-xfce.sh`.
 The Heroic games launcher for Epic games is not packaged in Debian. This is used to initially
 install and update Heroic. By default, when you start the client, it will warn you if an update is
 available. Just run `update-heroic` as root when that happens.
+
+
+### `update-retroarch`
+
+Download the latest RetroArch from retroarch.com and update default configs and assets for all
+users. THis is all done using harlinks so it doesn't encumber your drive.
 
 
 ### `winetricks`
