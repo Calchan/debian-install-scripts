@@ -2,7 +2,7 @@
 
 set -e
 
-apt purge *xanmod*
+apt purge -y *xanmod*
 dhclient
 apt install -y --no-install-recommends xboxdrv
 
