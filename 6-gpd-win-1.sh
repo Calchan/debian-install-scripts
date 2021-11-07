@@ -2,9 +2,8 @@
 
 set -e
 
-apt purge -y *xanmod*
 dhclient
-apt install -y --no-install-recommends xboxdrv
+apt install -y --no-install-recommends xboxdrv firmware-intel-sound firmware-sof-signed
 
 pushd configs/gpd-win-1/root > /dev/null
 for file in $(find * -type f); do
