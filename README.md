@@ -23,9 +23,9 @@ faster than on Windows. How about ~25fps in GTA5 at 720p on a dumb old Skylake l
 integrated graphics?
 
 None of this is rocket science. Just a collection of settings and tricks, with a goal of simplicity
-and reproducibility. Some fixes also, like for example for GameMode. I don't know how people use it
-but some of it is broken out of the box. There are some convenience scripts too, read about them
-below.
+and reproducibility. Some fixes also, like for example with GameMode. I don't know how people use it
+but some of it, the most important in my opinion, is broken out of the box. There are some
+convenience scripts too, read all about them below.
 
 Finally, these scripts work well but they don't look as nice or clean as I would want it. They grew
 organically over the years and it shows. Patches welcome.
@@ -380,7 +380,7 @@ configured properly.
 ### `6-gpd-win-3.sh`
 
 This additional script fixes a lot of issues when installing Linux to the GPD Win 3. Including:
-The only things which need fixing are sound,
+The only things which need fixing are:
 
 - Display rotated in hardware, due to it being from a tablet
 
