@@ -1,5 +1,7 @@
 #! /bin/bash
 
+apt install -y libxres1 libseat1
+
 TMPDIR="$(mktemp -d)"
 
 cat << EOF > "${TMPDIR}"/build-gamescope.sh
@@ -14,9 +16,10 @@ apt install -y --no-install-recommends \
     libxcb-res0-dev libxcomposite-dev libxdamage-dev libxkbcommon-dev libxrender-dev libxres-dev \
     libxtst-dev libxxf86vm-dev meson pax-utils pkg-config wayland-protocols xwayland
 cd /mnt
-git clone https://github.com/Plagman/gamescope
-cd gamescope
-git submodule update --init
+git clone --recurse-submodules https://github.com/Plagman/gamescope
+cd gamescope/subprojects/wlroots
+git checkout 0fcc8422
+cd ../..
 meson build/
 ninja -C build/
 cd build
