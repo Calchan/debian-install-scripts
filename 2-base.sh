@@ -52,6 +52,5 @@ done
 chmod -R g-w /root
 chmod -R o-rwx /root
 
-sed -i 's/\(linux_entry.*\)simple/\1advanced/' /etc/grub.d/10_linux
 update-grub
 update-initramfs -k all -u
