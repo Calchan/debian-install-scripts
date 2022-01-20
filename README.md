@@ -417,6 +417,9 @@ The recommended list of scripts to use is:
 
 - `4-intel-drivers.sh`
 
+- `4-docker.sh` (for `gamescope`, don't forget to run `update-gamescope` as root to install it the
+  first time)
+
 - `5-gaming-prep.sh`
 
 - `6-gpd-win-3.sh`
@@ -514,8 +517,10 @@ run-game %command%
 ```
 
 You can also switch resolutions when you want to use borderless windows (often recommended on Intel
-GPUs) at less than native resolution but still want it full screen. This is for example how I start
-Skyrim SE on my GPD Win 2:
+GPUs) at less than native resolution but still want it full screen.
+
+On Xorg (if you're using XFCE) you need to use `xrandr`. This is for example how I start Skyrim SE
+on my GPD Win 2 in Steam's launch options:
 ```
 xrandr -s 504x896; run-game %command%; xrandr -s 720x1280
 ```
@@ -524,6 +529,13 @@ It sets the resolution to 896x504 (x and y are inverted with `xrandr` due to the
 see above) then resets it to native resolution when the game exits. Note that in this particular
 case you also need to manually set the resolution in the game's config file to 896x504 (not
 inverted) because the UI won't list this specific resolution.
+
+If using Gnome then you're on Wayland. In this case you need `gamescope` to resize your screen.
+Make sure you run `4-docker.sh` at install time then run `update-gamescope` as root to install it
+initially or whenever you want to update it. This is how I start the same Skyrim SE in Steam:
+```
+gamescope -w 896 -h 504 -f -- run-game %command%
+```
 
 
 ## Miscellaneous
