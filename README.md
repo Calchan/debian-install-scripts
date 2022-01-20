@@ -50,13 +50,14 @@ and `dd` or `cp` it to a USB stick at least 1GB in size.
    git clone https://github.com/Calchan/debian-install-scripts
    ```
 
-4. Wired networking is recommended. Either ethernet, or a USB-to-ethernet adapter. I always use a
-   USB-tethered cell-phone out of habit. Make sure it's on WiFi because there's going to be a lot to
-   download. In case you really want to use your computer's WiFi for the second part of the
-   installation process instead of wired networking, you must do the first part (the actual Debian
-   install) using the same interface so that the installation software detects and installs all
-   that's needed. Then, once rebooted for the second part, locate your WiFi interface using `ip a`
-   (it's the one or one of those starting with `wl`). Finally, run:
+4. Wired networking is recommended, at least for the second part. Either ethernet, or a
+   USB-to-ethernet adapter. I always use a USB-tethered cell-phone out of habit. Make sure it's on
+   WiFi because there's going to be a lot to download. In case you really want to use your
+   computer's WiFi for the second part of the installation process instead of wired networking, you
+   must do the first part (the actual Debian install) using the same interface so that the
+   installation software detects and installs all that's needed. Then, once rebooted for the second
+   part, locate your WiFi interface using `ip a` (it's the one or one of those starting with `wl`).
+   Finally, run:
    ```
    wpa_passphrase '<your WiFi SSID> '<your WiFi passphrase>' > /tmp/wpa
    wpa_supplicant -c /tmp/wpa -i <your WiFi interface> &
