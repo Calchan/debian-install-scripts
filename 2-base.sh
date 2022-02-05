@@ -10,7 +10,7 @@ apt install -y \
     bash-completion \
     ca-certificates \
     firmware-linux \
-    ntfs-3g exfat-utils \
+    ntfs-3g exfatprogs \
     git \
     gnupg \
     lsb-release \
