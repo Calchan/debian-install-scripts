@@ -8,6 +8,7 @@ dhclient
 apt install -y \
     apt-transport-https \
     bash-completion \
+    curl \
     ca-certificates \
     firmware-linux \
     ntfs-3g exfatprogs \
