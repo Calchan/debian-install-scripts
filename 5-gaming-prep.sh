@@ -63,10 +63,10 @@ apt update
 dhclient
 apt install -y linux-xanmod
 
-echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" > /etc/apt/sources.list
-dhclient
-apt update
-dhclient
-apt upgrade -y
+#echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" > /etc/apt/sources.list
+#dhclient
+#apt update
+#dhclient
+#apt upgrade -y
 apt purge -y ibus xterm yelp
 apt autoremove -y
