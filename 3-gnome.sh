@@ -16,7 +16,7 @@ apt install -y \
     file-roller unrar unzip \
     tilix \
     libopenblas-base
-apt purge -y ibus yelp termit xterm
+apt purge -y ibus ifupdown yelp termit xterm
 apt autoremove -y
 
 rm -f /etc/network/interfaces

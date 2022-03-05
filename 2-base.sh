@@ -8,10 +8,9 @@ dhclient
 apt install -y \
     apt-transport-https \
     bash-completion \
-    curl \
     ca-certificates \
     firmware-linux \
-    ntfs-3g exfatprogs \
+    ntfs-3g exfatprogs f2fs-tools \
     git \
     gnupg \
     lsb-release \
@@ -21,7 +20,7 @@ apt install -y \
     sudo \
     tmux \
     vim-addon-manager vim-nox \
-    wget
+    wget curl
 
 gpasswd -a $(sed -n 's/^\([^:]*\):x:1000:.*/\1/p' /etc/passwd) sudo
 sed 's/^root:[^:]*:/root:*:/' -i /etc/shadow

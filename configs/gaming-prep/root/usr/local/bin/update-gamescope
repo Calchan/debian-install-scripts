@@ -26,8 +26,8 @@ scanelf -n gamescope
 EOF
 
 chmod +x "${TMPDIR}"/build-gamescope.sh
-docker run -it --rm -v "${TMPDIR}":/mnt debian:testing /mnt/build-gamescope.sh
+docker run -it --rm -v "${TMPDIR}":/mnt debian:testing-slim /mnt/build-gamescope.sh
 cp "${TMPDIR}"/gamescope/build/gamescope /usr/local/bin
 
 rm -rf "${TMPDIR}"
-docker image rm debian:testing
+docker image rm debian:testing-slim
