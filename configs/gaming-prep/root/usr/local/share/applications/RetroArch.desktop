@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=RetroArch
-Exec=/usr/local/share/RetroArch/RetroArch-Linux-x86_64.AppImage
-Terminal=false
-Type=Application
-Icon=/usr/local/share/icons/RetroArch.png
-Comment=A frontend for emulators, game engines and media players
-Categories=Game;

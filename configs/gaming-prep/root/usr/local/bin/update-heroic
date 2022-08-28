@@ -1,9 +1,0 @@
-#! /bin/bash
-
-TMP_DIR=$(mktemp -d)
-cd "${TMP_DIR}"
-RELEASE=$(wget -qO - https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest | sed -n 's|.*\(download/v[^"]*\.deb\)".*|\1|p')
-wget "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/${RELEASE}"
-apt install -y ./$(basename "${RELEASE}")
-cd
-rm -rf "${TMP_DIR}"

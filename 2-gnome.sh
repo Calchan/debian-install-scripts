@@ -14,7 +14,7 @@ apt install -y \
     gnome-screenshot \
     gnome-calculator \
     file-roller unrar unzip \
-    tilix \
+    nautilus-extension-gnome-terminal \
     libopenblas-base
 apt purge -y ibus ifupdown yelp termit xterm
 apt autoremove -y

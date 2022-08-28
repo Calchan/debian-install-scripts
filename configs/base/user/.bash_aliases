@@ -1,3 +1,3 @@
 . /usr/share/powerline/integrations/powerline.sh
 export EDITOR=vim
-export LESS='-F -r -x4'
+export LESS='-r -x4'
