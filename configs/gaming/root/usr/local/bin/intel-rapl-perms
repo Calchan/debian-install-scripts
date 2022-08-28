@@ -1,0 +1,34 @@
+#! /bin/bash
+
+for DELAY in 1 2 4 8 15 30 60; do
+    if [[ "$(find /sys/class/powercap/intel-rapl/intel-rapl\:0/intel-rapl\:0\:* -name name 2>/dev/null | wc -l)" -gt "2" ]]; then
+        break
+    fi
+    sleep "${DELAY}"
+done
+
+echo ">>> /sys/class/powercap/intel-rapl/intel-rapl:0/name"
+echo "Name: $(cat "/sys/class/powercap/intel-rapl/intel-rapl:0/name")"
+echo "Before:"
+ls -als "/sys/class/powercap/intel-rapl/intel-rapl:0/energy_uj"
+chown root:games "/sys/class/powercap/intel-rapl/intel-rapl:0/energy_uj"
+chmod g+r "/sys/class/powercap/intel-rapl/intel-rapl:0/energy_uj"
+echo "After:"
+ls -als "/sys/class/powercap/intel-rapl/intel-rapl:0/energy_uj"
+
+for NAME_PATH in $(find /sys/class/powercap/intel-rapl/intel-rapl\:0/intel-rapl\:0\:* -name name || true); do
+    echo ">>> ${NAME_PATH}"
+    NAME=$(cat "${NAME_PATH}")
+    echo "Name: ${NAME}"
+    if [[ "${NAME}" == "core" ]] || [[ "${NAME}" == "uncore" ]]; then
+        DIR_NAME=$(dirname "${NAME_PATH}")
+        echo "Before:"
+        ls -als "${DIR_NAME}/energy_uj"
+        chown root:games "${DIR_NAME}/energy_uj"
+        chmod g+r "${DIR_NAME}/energy_uj"
+        echo "After:"
+        ls -als "${DIR_NAME}/energy_uj"
+    else
+        echo "Not changing permissions"
+    fi
+done
