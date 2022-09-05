@@ -41,30 +41,12 @@ sed 's/^root:[^:]*:/root:*:/' -i /etc/shadow
 sed 's/# set bell-style/set bell-style/' -i /etc/inputrc
 vim-addons -w install powerline
 
-cd configs/base/root
+cd configs/base
 for file in $(find * -type f); do
     mkdir -p "$(dirname "/${file}")"
     cp -f "${file}" "/${file}"
     chmod 644 "/${file}"
 done
-
-cd ../user
-for userdir in /root /home/*; do
-    cp -f /etc/skel/.{bash_logout,bashrc,profile} "${userdir}"
-    mkdir -p "${userdir}/.ssh"
-    for file in $(find . -type f); do
-        mkdir -p "$(dirname "${userdir}/${file}")"
-        cp -f "${file}" "${userdir}/${file}"
-        chmod 644 "${userdir}/${file}"
-    done
-    find "${userdir}" -type d -exec chmod 0755 \{\} \;
-    find "${userdir}" -type f -exec chmod 0644 \{\} \;
-    chmod -R go-rwx "${userdir}/.ssh"
-    username=$(basename "${userdir}")
-    chown -R "${username}":"${username}" "${userdir}"
-done
-chmod -R g-w /root
-chmod -R o-rwx /root
 
 update-grub
 update-initramfs -k all -u

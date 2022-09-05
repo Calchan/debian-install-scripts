@@ -2,9 +2,6 @@
 
 set -e
 
-# Remove the networking setup from the initial install since it may conflict with NetworkManager
-rm -f /etc/network/interfaces
-
 cd /tmp
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install -y ./google-chrome-stable_current_amd64.deb
@@ -15,3 +12,20 @@ apt install -y ./google-chrome-stable_current_amd64.deb
 # termit and xterm are useless, we'll install xfce4-terminal below and it's much better
 apt purge -y ibus ifupdown yelp termit xterm
 apt autoremove -y
+
+# Remove the networking setup from the initial install since it may conflict with NetworkManager
+rm -f /etc/network/interfaces
+
+cd /etc/skel
+for userdir in /home/*; do
+    for file in $(find . -type f,l); do
+        mkdir -p "$(dirname "${userdir}/${file}")"
+        cp -f "${file}" "${userdir}/${file}"
+        chmod 640 "${userdir}/${file}"
+    done
+    find "${userdir}" -type d -exec chmod 0750 \{\} \;
+    find "${userdir}" -type f -exec chmod 0640 \{\} \;
+    chmod -R go-rwx "${userdir}/.ssh"
+    username=$(basename "${userdir}")
+    chown -R "${username}":"${username}" "${userdir}"
+done
