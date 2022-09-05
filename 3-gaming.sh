@@ -3,12 +3,9 @@
 set -e
 
 dpkg --add-architecture i386
-dhclient
 apt update
-dhclient
 apt upgrade -y
 
-dhclient
 apt install -y mangohud:amd64 mangohud:i386 steam
 
 pushd configs/gaming/root > /dev/null
@@ -35,16 +32,12 @@ for userdir in /home/*; do
     gpasswd -a "${username}" games
 done
 
-dhclient
 /usr/local/bin/update-heroic
 
 #cd /tmp
-#dhclient
 #wget -qO - https://dl.xanmod.org/gpg.key | apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
 #echo 'deb http://deb.xanmod.org releases main' > /etc/apt/sources.list.d/xanmod-kernel.list
-#dhclient
 #apt update
-#dhclient
 #apt install -y linux-xanmod
 
 apt purge -y ibus xterm yelp
