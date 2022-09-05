@@ -39,6 +39,3 @@ done
 #echo 'deb http://deb.xanmod.org releases main' > /etc/apt/sources.list.d/xanmod-kernel.list
 #apt update
 #apt install -y linux-xanmod
-
-apt purge -y ibus xterm yelp
-apt autoremove -y
