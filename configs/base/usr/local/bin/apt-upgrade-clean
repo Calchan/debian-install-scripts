@@ -1,0 +1,10 @@
+#! /bin/bash
+
+set -e
+
+echo "Upgrade new packages"
+apt upgrade -y
+echo "Auto-remove unneeded packages"
+apt autoremove -y
+echo "Purge residual configurations"
+apt purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')

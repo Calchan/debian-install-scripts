@@ -1,0 +1,12 @@
+[Unit]
+Description=Run 'apt upgrade' and cleanup on shutdown/reboot
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/bin/true
+ExecStop=/usr/local/bin/apt-upgrade-clean
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target
