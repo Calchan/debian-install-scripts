@@ -17,8 +17,8 @@ apt install -y \
     libopenblas-base
 
 cd configs/gnome
-for file in $(find * -type f); do
+for file in $(find * -type f,l); do
     mkdir -p "$(dirname "/${file}")"
     cp -f "${file}" "/${file}"
-    chmod 644 "/${file}"
+    chmod 644 "/${file}" || true
 done

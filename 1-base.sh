@@ -42,10 +42,10 @@ sed 's/# set bell-style/set bell-style/' -i /etc/inputrc
 vim-addons -w install powerline
 
 cd configs/base
-for file in $(find * -type f); do
+for file in $(find * -type f,l); do
     mkdir -p "$(dirname "/${file}")"
     cp -f "${file}" "/${file}"
-    chmod 644 "/${file}"
+    chmod 644 "/${file}" || true
 done
 
 update-grub

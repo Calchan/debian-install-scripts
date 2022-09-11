@@ -24,8 +24,8 @@ apt install -y \
 apt install -y xfce4-terminal
 
 cd configs/xfce
-for file in $(find * -type f); do
+for file in $(find * -type f,l); do
     mkdir -p "$(dirname "/${file}")"
     cp -f "${file}" "/${file}"
-    chmod 644 "/${file}"
+    chmod 644 "/${file}" || true
 done
