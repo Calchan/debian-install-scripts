@@ -14,9 +14,12 @@ for file in $(find * -type f,l); do
     cp -f "${file}" "/${file}"
     chmod 644 "/${file}" || true
 done
-chmod +x /usr/local/bin/*
 
+chmod +x /usr/local/bin/*
 /usr/local/bin/update-heroic
+
+sed 's/^\(GRUB_CMDLINE_LINUX_DEFAULT=".*\)"/\1 mitigations=off i915.mitigations=off"/' -i \
+    /etc/default/grub.d/local.cfg
 
 #cd /tmp
 #wget -qO - https://dl.xanmod.org/gpg.key | apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
