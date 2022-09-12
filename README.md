@@ -138,6 +138,19 @@ This are all the scripts whose name start with `3-`. Just use however many you n
 Install the Docker repository and the required packages. You should never use the Docker packages
 from your distribution.
 
+#### `3-gaming.sh`
+
+Install Steam, Heroic (for Epic and GOG games), some useful tools and customizations, and all the
+required 32-bit dependencies. System performance is optimized for gaming at the expense of some more
+lenient security (CPU mitigations are disabled, `energy_uj` in Intel RAPL interfaces are enabled).
+You should still be fine unless you do very silly things on the internet.
+
+When starting Heroic, it will show if a new version is available at the bottom left. Run `sudo
+update-heroic` in a terminal to update it.
+
+The default MangoHud keybindings are `LeftShift =` to toggle the HUD (default off), and `LeftShift
+-` to cycle through the fps limits (default unlimited).
+
 
 #### `3-intel-drivers.sh`
 
@@ -165,3 +178,9 @@ Another repository is added for Helm. The script then installs the latest versio
 #### `3-office.sh`
 
 Just LibreOffice and Gimp with a few packages useful with them.
+
+
+### Finalize
+
+Make sure to run the `4-finalize.sh` script at the end, unless you've done a server install usning
+only `1-base.sh`.
