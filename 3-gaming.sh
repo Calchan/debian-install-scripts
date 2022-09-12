@@ -15,6 +15,11 @@ for file in $(find * -type f,l); do
     chmod 644 "/${file}" || true
 done
 
+for userdir in /home/*; do
+    username=$(basename "${userdir}")
+    gpasswd -a "${username}" games
+done
+
 chmod +x /usr/local/bin/*
 /usr/local/bin/update-heroic
 
