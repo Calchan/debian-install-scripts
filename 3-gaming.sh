@@ -11,7 +11,7 @@ apt install -y mangohud:amd64 mangohud:i386 steam
 cd configs/gaming
 for file in $(find * -type f,l); do
     mkdir -p "$(dirname "/${file}")"
-    cp -f "${file}" "/${file}"
+    cp -df "${file}" "/${file}"
     chmod 644 "/${file}" || true
 done
 

@@ -21,7 +21,7 @@ cd /etc/skel
 for userdir in /home/*; do
     for file in $(find . -type f,l); do
         mkdir -p "$(dirname "${userdir}/${file}")"
-        cp -f "${file}" "${userdir}/${file}"
+        cp -df "${file}" "${userdir}/${file}"
         chmod 640 "${userdir}/${file}"
     done
     find "${userdir}" -type d -exec chmod 0750 \{\} \;

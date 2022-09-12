@@ -44,7 +44,7 @@ vim-addons -w install powerline
 cd configs/base
 for file in $(find * -type f,l); do
     mkdir -p "$(dirname "/${file}")"
-    cp -f "${file}" "/${file}"
+    cp -df "${file}" "/${file}"
     chmod 644 "/${file}" || true
 done
 
