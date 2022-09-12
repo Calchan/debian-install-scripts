@@ -34,7 +34,6 @@ apt install -y \
     tmux \
     vim-addon-manager vim-nox \
     wget curl
-apt install --no-install-recommends anacron
 
 gpasswd -a $(sed -n 's/^\([^:]*\):x:1000:.*/\1/p' /etc/passwd) sudo
 sed 's/^root:[^:]*:/root:*:/' -i /etc/shadow
