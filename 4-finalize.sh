@@ -18,6 +18,7 @@ apt purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
 rm -f /etc/network/interfaces
 
 cd /etc/skel
+set +e
 for userdir in /home/*; do
     for file in $(find . -type f,l); do
         mkdir -p "$(dirname "${userdir}/${file}")"
