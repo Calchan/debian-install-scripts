@@ -20,6 +20,7 @@ chmod +x /usr/local/bin/*
 
 sed 's/^\(GRUB_CMDLINE_LINUX_DEFAULT=".*\)"/\1 mitigations=off i915.mitigations=off"/' -i \
     /etc/default/grub.d/local.cfg
+update-grub
 
 #cd /tmp
 #wget -qO - https://dl.xanmod.org/gpg.key | apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
