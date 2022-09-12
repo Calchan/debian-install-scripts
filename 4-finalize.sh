@@ -6,7 +6,7 @@ set -e
 # ibus+mozc is a bad combination
 # ifupdown is no longer needed with NetworkManager installed
 # termit and xterm are useless, we'll install xfce4-terminal below and it's much better
-apt purge -y ibus ifupdown yelp termit xterm
+apt purge -y ibus ifupdown yelp termit tilix xterm
 apt autoremove -y
 apt purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
 
