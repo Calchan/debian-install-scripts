@@ -130,7 +130,11 @@ first connection, so you should never have to do that again.
 
 ### Optional stuff
 
-This are all the scripts whose name start with `3-`. Just use however many you need or want.
+
+#### `3-chrome.sh`
+
+Install Google Chrome stable and its repository. If you prefer Firefox, run `apt install
+firefox-esr` instead.
 
 
 #### `3-docker.sh`
