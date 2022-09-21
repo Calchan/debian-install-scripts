@@ -1,0 +1,4 @@
+#! /bin/bash
+
+modprobe xpad
+echo 0x0079 0x18d4 > /sys/bus/usb/drivers/xpad/new_id
