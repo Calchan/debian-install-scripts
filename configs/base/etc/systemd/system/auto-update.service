@@ -4,7 +4,8 @@ Description=Run 'apt upgrade' and cleanup on shutdown/reboot
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStart=/bin/true
+ExecStartPre=-/usr/lib/apt/apt-helper wait-online
+ExecStart=/usr/lib/apt/apt.systemd.daily update
 ExecStop=/usr/local/bin/apt-upgrade-clean
 TimeoutStopSec=300
 
