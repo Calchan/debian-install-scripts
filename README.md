@@ -1,9 +1,9 @@
 # Debian install scripts
 
 TL;DR
-- Lean and fast, no useless cruft
+- Lean and fast, no useless cruft, and yet full-featured
 - Very up-to-date, not your grandma's Debian
-- Rolling, no upgrades every 6 months which may or may not work and always leave a mess
+- Rolling, no upgrades every 6 months which may or may not work but always leave a mess
 - Auto-updating, new packages are downloaded in the background and installed at shutdown/reboot time
 - Options for Chrome/Firefox, Office tools, Japanese input, etc…
 - Optional gaming setup for Steam, Epic and GOG with performance optimizations, most Windows games
@@ -44,7 +44,7 @@ After that, a single partition is enough. If you like your life complicated and 
 that's fine too. I tend to use btrfs everywhere but ext4 is probably a better choice here. Don't
 forget to set the `discard` (if using an SSD) and `noatime` mount options.
 
-**And now, the only requirement: when you get to the software selection part, make sure to deselect
+And now, the only requirement: **when you get to the software selection part, make sure to deselect
 everything.** Yes, even the standard system utilities at the bottom of the list. We'll do better
 with the scripts.
 
@@ -81,7 +81,7 @@ git clone https://github.com/calchan/debian-install-scripts
 
 The scripts are split in multiple parts so you can decide what to install. If you stop after
 `1-base.sh` you'll have to figure out networking on your own, but it's a viable final destination
-for a server. If you di this, don't reboot until you have installed the packages you'll need for
+for a server. If you do this, don't reboot until you have installed the packages you'll need for
 networking and made sure it will be working.
 
 The root password will be deleted and root login disabled for security reasons. Instead, the user
@@ -133,8 +133,6 @@ in place of the free ones.
 
 
 #### `3-japanese-input.sh`
-
-You probably don't need Japanese input. I do.
 
 The default binding to switch keyboards is `Win+Space`.
 
