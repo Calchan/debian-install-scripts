@@ -15,7 +15,7 @@ apt install -y \
     gvfs-backends gvfs-fuse \
     thunar-archive-plugin unzip unrar \
     ristretto \
-    mpv libopenblas-base \
+    mpv \
     seahorse \
     mousepad \
     galculator

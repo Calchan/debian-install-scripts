@@ -13,8 +13,7 @@ apt install -y \
     gnome-screenshot \
     gnome-calculator \
     file-roller unrar unzip \
-    nautilus-extension-gnome-terminal \
-    libopenblas-base
+    nautilus-extension-gnome-terminal
 
 cd configs/gnome
 for file in $(find * -type f,l); do
