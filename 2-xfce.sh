@@ -10,6 +10,7 @@ apt install -y \
     xfce4-power-manager \
     network-manager-gnome \
     blueman libspa-0.2-bluetooth \
+    xfce4-terminal \
     xfce4-screenshooter \
     tumbler-plugins-extra \
     gvfs-backends gvfs-fuse \
@@ -19,9 +20,6 @@ apt install -y \
     seahorse \
     mousepad \
     galculator
-
-# Install separately so as to not provide a dumb X session
-apt install -y xfce4-terminal
 
 cd configs/xfce
 for file in $(find * -type f,l); do
