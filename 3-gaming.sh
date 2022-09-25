@@ -6,6 +6,9 @@ dpkg --add-architecture i386
 apt update
 apt upgrade -y
 
+echo steam steam/license note '' | debconf-set-selections
+echo steam steam/question select 'I AGREE' | debconf-set-selections
+
 apt install -y mangohud:amd64 mangohud:i386 steam
 
 cd configs/gaming
