@@ -374,7 +374,9 @@ fi
 cd /etc/skel
 for USERDIR in /home/*; do
     for file in $(find . -type f,l); do
-        mkdir -p "$(dirname "${USERDIR}/${file}")"
+        FILEDIR="$(dirname "${USERDIR}/${file}")"
+        mkdir -p "${FILEDIR}"
+        chmod 750 "${FILEDIR}"
         cp -df "${file}" "${USERDIR}/${file}"
         chmod 640 "${USERDIR}/${file}"
         log "$(ls -als "${USERDIR}/${file}")"
