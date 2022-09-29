@@ -314,7 +314,7 @@ log "Upgrading base install"
 apt install -y --reinstall $(apt list --upgradable 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
 apt autoremove -y
 
-log "Installing packages:${PACKAGES}"
+log "Installing packages:"${PACKAGES}
 apt install -y ${PACKAGES}
 
 # TODO remove below
