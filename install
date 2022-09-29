@@ -263,7 +263,7 @@ fi
 
 if is_selected "gimp"; then
     PACKAGES+="
-        gimp gimp-data-extras
+        gimp gimp-data-extras gimp-gmic gimp-lensfun gimp-plugin-registry gimp-texturize
     "
 fi
 
