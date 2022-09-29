@@ -337,7 +337,7 @@ for MODULE in base ${SELECTED_MODULES}; do
 done
 
 log "Copying skel files for root user"
-cd "${SCRIPTS_PATH}/config/base/etc/skel"
+cd "${SCRIPTS_PATH}/configs/base/etc/skel"
 for file in $(find . -type f,l); do
     mkdir -p "$(dirname "/root/${file}")"
     cp -df "${file}" "/root/${file}"
