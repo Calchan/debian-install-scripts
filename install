@@ -332,7 +332,7 @@ for MODULE in base ${SELECTED_MODULES}; do
         set +e
         chmod 644 "/${file}" || true
         set -e
-        log "$(ls -als "/${file}" || echo "Error copying /${file}")"
+        log "$(ls -1 "/${file}" || echo "Error copying /${file}")"
     done
 done
 
