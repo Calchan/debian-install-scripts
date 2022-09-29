@@ -331,11 +331,7 @@ for MODULE in base ${SELECTED_MODULES}; do
         mkdir -p "/$(dirname "/${file}")"
         cp -df "${file}" "/${file}"
         chmod 644 "/${file}" || true
-        if [[ -e "/${file}" ]]; then
-            log "$(ls -als "/${file}")"
-        else
-            log "${file}: not found"
-        fi
+        log "$(ls -als "/${file}" || echo "Error copying /${file}")"
     done
 done
 
@@ -377,6 +373,7 @@ for USERDIR in /home/*; do
         chmod 750 "${FILEDIR}"
         cp -df "${file}" "${USERDIR}/${file}"
         chmod 640 "${USERDIR}/${file}"
+        log "$(ls -als "${USERDIR}/${file}" || echo "Error copying ${USERDIR}/${file}")"
         log "$(ls -als "${USERDIR}/${file}")"
     done
     find "${USERDIR}" -type d -exec chmod 0750 \{\} \;
