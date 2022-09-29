@@ -343,6 +343,7 @@ for file in $(find . -type f,l); do
     cp -df "${file}" "/root/${file}"
     log "$(ls -1 "/root/${file}" || echo "Error copying /root/${file}")"
 done
+log "Resetting permisions in /root"
 find /root -type d -exec chmod 0750 \{\} \;
 find /root -type f -exec chmod 0640 \{\} \;
 chmod -R go-rwx /root/.ssh
@@ -388,6 +389,7 @@ for USERDIR in /home/*; do
         cp -df "${file}" "${USERDIR}/${file}"
         log "$(ls -1 "${USERDIR}/${file}" || echo "Error copying ${USERDIR}/${file}")"
     done
+    log "Resetting permissions in ${USERDIR}"
     find "${USERDIR}" -type d -exec chmod 0750 \{\} \;
     find "${USERDIR}" -type f -exec chmod 0640 \{\} \;
     chmod -R go-rwx "${USERDIR}/.ssh"
