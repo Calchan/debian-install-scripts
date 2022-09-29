@@ -11,8 +11,8 @@ SCRIPTS_PATH="/tmp/debian-install-scripts-main"
 cd "${SCRIPTS_PATH}"
 
 log() {
-    echo ${@}
-    echo ${@} >> /root/install.log
+    echo "${@}"
+    echo "${@}" >> /root/install.log
 }
 
 is_selected() {
@@ -147,7 +147,7 @@ while :; do
     esac
 done
 
-log "Selected modules: "${SELECTED_MODULES}
+log "Selected modules:${SELECTED_MODULES}"
 
 tput cnorm
 
@@ -315,7 +315,7 @@ log "Upgrading base install"
 apt install -y --reinstall $(apt list --upgradable 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
 apt autoremove -y
 
-log "Installing packages: "${PACKAGES}
+log "Installing packages:${PACKAGES}"
 apt install -y ${PACKAGES}
 
 # TODO remove below
