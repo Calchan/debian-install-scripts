@@ -11,8 +11,8 @@ SCRIPTS_PATH="/tmp/debian-install-scripts-main"
 cd "${SCRIPTS_PATH}"
 
 log() {
-    echo "${@}"
-    echo "${@}" >> /root/install.log
+    echo ${@}
+    echo ${@} >> /root/install.log
 }
 
 is_selected() {
