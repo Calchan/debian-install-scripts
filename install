@@ -62,7 +62,7 @@ while :; do
     show_line "Firefox" "firefox"
     show_line "LibreOffice and some addons" "office"
     show_line "Gimp and some plugins" "gimp"
-    show_line "Gaming" "gaming"
+    show_line "Play Steam, Epic and GOG games, with tools and optimizations" "gaming"
     show_line "Japanese keyboard" "japanese"
     echo
     show_line "Selection done, install now" "done"
