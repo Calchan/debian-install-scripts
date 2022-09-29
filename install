@@ -318,7 +318,6 @@ log "Installing packages:${PACKAGES}"
 apt install -y ${PACKAGES}
 
 # TODO remove below
-set +e
 
 for MODULE in base ${SELECTED_MODULES}; do
     if [[ ! -d "${SCRIPTS_PATH}/configs/${MODULE}" ]]; then
@@ -330,7 +329,9 @@ for MODULE in base ${SELECTED_MODULES}; do
     for file in $(find * -type f,l); do
         mkdir -p "/$(dirname "/${file}")"
         cp -df "${file}" "/${file}"
+        set +e
         chmod 644 "/${file}" || true
+        set -e
         log "$(ls -als "/${file}" || echo "Error copying /${file}")"
     done
 done
