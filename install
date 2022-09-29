@@ -8,8 +8,6 @@ DEB_ROOT="deb http://deb.debian.org/debian"
 SOURCES_LIST="/etc/apt/sources.list"
 SCRIPTS_PATH="/tmp/debian-install-scripts-main"
 
-cd "${SCRIPTS_PATH}"
-
 log() {
     echo "${@}"
     echo "${@}" >> /root/install.log
@@ -321,6 +319,7 @@ apt install -y ${PACKAGES}
 
 # TODO remove below
 set +e
+
 for MODULE in base ${SELECTED_MODULES}; do
     if [[ ! -d "${SCRIPTS_PATH}/configs/${MODULE}" ]]; then
         log "No config for module ${MODULE}"
@@ -335,6 +334,18 @@ for MODULE in base ${SELECTED_MODULES}; do
         log "$(ls -als "/${file}" || echo "Error copying /${file}")"
     done
 done
+
+log "Copying skel files for root user"
+cd "${SCRIPTS_PATH}/config/base/etc/skel"
+for file in $(find . -type f,l); do
+    mkdir -p "$(dirname "/root/${file}")"
+    cp -df "${file}" "/root/${file}"
+    log "$(ls -1 "/root/${file}" || echo "Error copying /root/${file}")"
+done
+find /root -type d -exec chmod 0750 \{\} \;
+find /root -type f -exec chmod 0640 \{\} \;
+chmod -R go-rwx /root/.ssh
+chown -R root:root /root
 
 log "Making everything in /usr/local/bin executable"
 chmod a+rx /usr/local/bin/*
