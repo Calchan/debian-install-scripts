@@ -387,7 +387,7 @@ for USERDIR in /home/*; do
 done
 
 # TODO More cleanups from 4-finalize.sh here
-log "Removing resudual configs"
+log "Removing residual configs"
 apt purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
 
 log "Enable powerline globally"
