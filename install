@@ -257,6 +257,7 @@ if is_selected "office"; then
     # TODO automatically add more lightproof languages?
     PACKAGES+="
         libreoffice libreoffice-lightproof-en libreoffice-style-elementary
+        gstreamer1.0-vaapi
     "
 fi
 
