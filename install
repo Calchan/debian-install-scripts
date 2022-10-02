@@ -404,7 +404,7 @@ for USERDIR in /home/*; do
 done
 
 log "Removing undesirables"
-apt purge -y ibus yelp termit tilix xterm zutty
+apt purge -y ibus plymouth yelp termit tilix xterm zutty
 apt autoremove -y
 
 log "Removing residual configs"
