@@ -288,7 +288,7 @@ fi
 
 if is_selected "gaming"; then
     PACKAGES+="
-        mangohud:amd64 mangohud:i386 steam
+        mangohud:amd64 mangohud:i386 protontricks steam
     "
     echo steam steam/license note "" | debconf-set-selections
     echo steam steam/question select "I AGREE" | debconf-set-selections
