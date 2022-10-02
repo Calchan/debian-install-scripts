@@ -2,6 +2,8 @@
 
 set -e
 
+echo "Cleaning potentially-broken previous install"
+dpkg --configure -a
 echo "Upgrade new packages"
 apt upgrade -y
 echo "Auto-remove unneeded packages"
