@@ -1,7 +1,5 @@
 #! /bin/bash
 
-set -e
-
 echo "Cleaning potentially-broken previous install"
 dpkg --configure -a
 echo "Upgrade new packages"
