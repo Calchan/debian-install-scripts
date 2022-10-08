@@ -4,7 +4,7 @@ echo "Cleaning potentially-broken previous install"
 dpkg --configure -a
 echo "Upgrade new packages"
 apt upgrade -y
-echo "Auto-remove unneeded packages"
-apt autoremove -y
+echo "Auto-purge unneeded packages"
+apt autopurge -y
 echo "Purge residual configurations"
 apt purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
