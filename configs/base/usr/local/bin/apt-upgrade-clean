@@ -1,7 +1,9 @@
 #! /bin/bash
 
+set -e
+
 echo "Cleaning potentially-broken previous install"
-dpkg --configure -a
+dpkg --configure -a || true
 echo "Upgrade new packages"
 apt upgrade -y
 echo "Auto-purge unneeded packages"
