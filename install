@@ -363,51 +363,13 @@ if [[ -n "$(lspci | grep VGA.*Intel)" ]]; then
     echo i915 >> /etc/initramfs-tools/modules
 fi
 
-# Masive kludge because XFCE's desktop configuration is suboptimal
-if is_selected "xfce"; then
-    echo '<?xml version="1.0" encoding="UTF-8"?>
-
-<channel name="xfce4-desktop" version="1.0">
-  <property name="backdrop" type="empty">
-    <property name="screen0" type="empty">' \
-        > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-    OUTPUTS="$(ls /sys/class/drm | sed -n 's/^card[0-9]*-//p' | sed 's/HDMI-A/HDMI/')"
-    for OUTPUT in ${OUTPUTS}; do
-        echo '      <property name="monitor'${OUTPUT}'" type="empty">' \
-            >> /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-        for WORKSPACE in {0..15}; do
-            echo '        <property name="workspace'${WORKSPACE}'" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="0"/>
-          <property name="rgba1" type="array">
-            <value type="double" value="0.25"/>
-            <value type="double" value="0.25"/>
-            <value type="double" value="0.25"/>
-            <value type="double" value="1.0"/>
-          </property>
-        </property>' \
-                >> /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-        done
-        echo '      </property>' \
-            >> /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-    done
-    echo '    </property>
-  </property>
-  <property name="desktop-icons" type="empty">
-    <property name="file-icons" type="empty">
-      <property name="show-trash" type="bool" value="false"/>
-      <property name="show-filesystem" type="bool" value="false"/>
-      <property name="show-home" type="bool" value="false"/>
-      <property name="show-removable" type="bool" value="false"/>
-    </property>
-    <property name="tooltip-size" type="double" value="256.000000"/>
-  </property>
-  <property name="last" type="empty">
-    <property name="window-width" type="int" value="653"/>
-    <property name="window-height" type="int" value="558"/>
-  </property>
-</channel>' \
-        >> /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+if ! is_selected "server"; then
+    mkdir -p /usr/local/share/images
+    cp "${SCRIPTS_PATH}/configs/desktop/usr/local/share/images/25%_gray_1280x720.png" \
+        /usr/local/share/images
+    chmod -R 644 /usr/local/share/images
+    update-alternatives --install /usr/share/images/desktop-base/desktop-background \
+        desktop-background /usr/local/share/images/gray.png 90
 fi
 
 if is_selected "chrome"; then
