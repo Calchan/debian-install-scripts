@@ -323,16 +323,16 @@ apt install -y ${PACKAGES}
 
 log "Copying skel files for root user"
 cd "/etc/skel"
-for file in $(find . -type f,l); do
-    mkdir -p "$(dirname "/root/${file}")"
-    cp -df "${file}" "/root/${file}"
-    log "$(ls -1 "/root/${file}" || echo "Error copying /root/${file}")"
+for FILE in $(find . -type f,l); do
+    mkdir -p "$(dirname "/root/${FILE}")"
+    cp -df "${FILE}" "/root/${FILE}"
+    log "$(ls -1 "/root/${FILE}" || echo "Error copying /root/${FILE}")"
 done
 cd "${SCRIPTS_PATH}/configs/base/etc/skel"
-for file in $(find . -type f,l); do
-    mkdir -p "$(dirname "/root/${file}")"
-    cp -df "${file}" "/root/${file}"
-    log "$(ls -1 "/root/${file}" || echo "Error copying /root/${file}")"
+for FILE in $(find . -type f,l); do
+    mkdir -p "$(dirname "/root/${FILE}")"
+    cp -df "${FILE}" "/root/${FILE}"
+    log "$(ls -1 "/root/${FILE}" || echo "Error copying /root/${FILE}")"
 done
 log "Resetting permisions in /root"
 mkdir -p /root/.ssh
@@ -348,13 +348,18 @@ for MODULE in base ${SELECTED_MODULES}; do
     fi
     log "Copying configs for module ${MODULE}"
     cd "${SCRIPTS_PATH}/configs/${MODULE}"
-    for file in $(find * -type f,l); do
-        mkdir -p "/$(dirname "/${file}")"
-        cp -df "${file}" "/${file}"
+    for FILE in $(find * -type f,l); do
+        mkdir -p "/$(dirname "/${FILE}")"
+        DIR="$(dirname "/${FILE}")"
+        while [[ "${DIR}" != "/" ]]; do
+            chown 755 "${DIR}"
+            DIR="$(dirname "${DIR}")"
+        done
+        cp -df "${FILE}" "/${FILE}"
         set +e
-        chmod 644 "/${file}" || true
+        chmod 644 "/${FILE}" || true
         set -e
-        log "$(ls -1 "/${file}" || echo "Error copying /${file}")"
+        log "$(ls -1 "/${FILE}" || echo "Error copying /${FILE}")"
     done
 done
 
@@ -398,10 +403,10 @@ cd /etc/skel
 for USERDIR in /home/*; do
     USERNAME=$(basename "${USERDIR}")
     log "Copying skel files for user ${USERNAME}"
-    for file in $(find . -type f,l); do
-        mkdir -p "$(dirname "${USERDIR}/${file}")"
-        cp -df "${file}" "${USERDIR}/${file}"
-        log "$(ls -1 "${USERDIR}/${file}" || echo "Error copying ${USERDIR}/${file}")"
+    for FILE in $(find . -type f,l); do
+        mkdir -p "$(dirname "${USERDIR}/${FILE}")"
+        cp -df "${FILE}" "${USERDIR}/${FILE}"
+        log "$(ls -1 "${USERDIR}/${FILE}" || echo "Error copying ${USERDIR}/${FILE}")"
     done
     log "Resetting permissions in ${USERDIR}"
     mkdir -p "${USERDIR}/.ssh"
