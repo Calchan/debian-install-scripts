@@ -352,7 +352,7 @@ for MODULE in base ${SELECTED_MODULES}; do
         mkdir -p "/$(dirname "/${FILE}")"
         DIR="$(dirname "/${FILE}")"
         while [[ "${DIR}" != "/" ]]; do
-            chown 755 "${DIR}"
+            chmod 755 "${DIR}"
             DIR="$(dirname "${DIR}")"
         done
         cp -df "${FILE}" "/${FILE}"
