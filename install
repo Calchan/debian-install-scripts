@@ -3,7 +3,7 @@
 set -e
 
 AVAILABLE_MODULES="server xfce gnome nvidia nvidia470 chrome firefox office gimp gaming japanese"
-SELECTED_MODULES=" xfce chrome office "
+SELECTED_MODULES=" xfce desktop chrome office "
 DEB_ROOT="deb http://deb.debian.org/debian"
 SOURCES_LIST="/etc/apt/sources.list"
 SCRIPTS_PATH="/tmp/debian-install-scripts-main"
@@ -122,7 +122,8 @@ while :; do
                     SELECTED_MODULES="${SELECTED_MODULES/ server }"
                     SELECTED_MODULES="${SELECTED_MODULES/ xfce }"
                     SELECTED_MODULES="${SELECTED_MODULES/ gnome }"
-                    SELECTED_MODULES=" ${HIGHLIGHTED} ${SELECTED_MODULES}"
+                    SELECTED_MODULES="${SELECTED_MODULES/ desktop }"
+                    SELECTED_MODULES=" ${HIGHLIGHTED} desktop ${SELECTED_MODULES}"
                     ;;
                 nvidia|nvidia470)
                     if is_selected "${HIGHLIGHTED}"; then
@@ -174,7 +175,9 @@ if is_selected "server"; then
         ifupdown
         openssh-server
     "
-else
+fi
+
+if is_selected "desktop"; then
     PACKAGES+="
         libspa-0.2-bluetooth
         gvfs-backends gvfs-fuse
@@ -364,10 +367,6 @@ if [[ -n "$(lspci | grep VGA.*Intel)" ]]; then
 fi
 
 if ! is_selected "server"; then
-    mkdir -p /usr/local/share/images
-    cp "${SCRIPTS_PATH}/configs/desktop/usr/local/share/images/25%_gray_1280x720.png" \
-        /usr/local/share/images
-    chmod -R 644 /usr/local/share/images
     update-alternatives --install /usr/share/images/desktop-base/desktop-background \
         desktop-background /usr/local/share/images/gray.png 90
 fi
