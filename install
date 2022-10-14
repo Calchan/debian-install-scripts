@@ -373,7 +373,7 @@ fi
 
 if ! is_selected "server"; then
     update-alternatives --install /usr/share/images/desktop-base/desktop-background \
-        desktop-background "/usr/local/share/images/25%_gray_1280x720.png" 90
+        desktop-background "/usr/local/share/images/gray_1280x720.png" 90
 fi
 
 if is_selected "chrome"; then
