@@ -231,7 +231,9 @@ if is_selected "gnome"; then
     PACKAGES+="
         gnome-shell
         gnome-tweaks
-        gnome-shell-extensions
+        gnome-shell-extension-arc-menu
+        gnome-shell-extension-dash-to-panel
+        gnome-shell-extension-manager
         nautilus
         totem gstreamer1.0-vaapi
         eog
@@ -253,6 +255,11 @@ if is_selected "japanese"; then
     PACKAGES+="
         fcitx5-mozc
     "
+    if is_selected "gnome"; then
+        PACKAGES+="
+            gnome-shell-extension-kimpanel
+        "
+    fi
 fi
 
 if is_selected "office"; then
