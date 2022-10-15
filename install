@@ -235,6 +235,7 @@ if is_selected "gnome"; then
         gnome-shell-extension-arc-menu
         gnome-shell-extension-dash-to-panel
         gnome-shell-extension-manager
+        gnome-shell-extension-pixelsaver
         nautilus
         totem gstreamer1.0-vaapi
         eog
