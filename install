@@ -385,7 +385,7 @@ fi
 
 if is_selected "gaming"; then
     log "Installing Heroic"
-    /usr/local/bin/update-heroic
+    /usr/bin/update-heroic
     for USERDIR in /home/*; do
         log "Adding ${USERNAME} to games group"
         USERNAME=$(basename "${USERDIR}")
