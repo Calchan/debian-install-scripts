@@ -3,13 +3,11 @@
 set -e
 export DEBIAN_FRONTEND=noninteractive
 
-echo "Clean potentially-broken previous install"
-dpkg --configure -a || true
-echo "Upgrade new packages"
+echo ">>> Upgrade packages"
 apt upgrade -y
-echo "Purge unneeded packages"
+echo ">>> Purge unneeded packages"
 apt autopurge -y
-echo "Purge residual configurations"
+echo ">>> Purge residual configurations"
 apt purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
-echo "Clean package cache"
+echo ">>> Clean package cache"
 apt clean -y
