@@ -3,7 +3,7 @@ Description=Set /sys permissions for GameMode
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/intel-rapl-perms
+ExecStart=/usr/bin/intel-rapl-perms
 RemainAfterExit=true
 StandardOutput=journal
 

@@ -6,7 +6,7 @@ Type=oneshot
 RemainAfterExit=true
 ExecStartPre=-/usr/lib/apt/apt-helper wait-online
 ExecStart=/usr/lib/apt/apt.systemd.daily update
-ExecStop=/usr/local/bin/auto-upgrade
+ExecStop=/usr/bin/auto-upgrade
 TimeoutStopSec=600
 
 [Install]

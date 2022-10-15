@@ -1,6 +1,7 @@
 #! /bin/bash
 
 set -e
+umask 0022
 
 AVAILABLE_MODULES="server xfce gnome nvidia nvidia470 chrome firefox office gimp gaming japanese"
 SELECTED_MODULES=" xfce desktop chrome office "
@@ -357,21 +358,10 @@ for MODULE in base ${SELECTED_MODULES}; do
     cd "${SCRIPTS_PATH}/configs/${MODULE}"
     for FILE in $(find * -type f,l); do
         mkdir -p "/$(dirname "/${FILE}")"
-        DIR="$(dirname "/${FILE}")"
-        while [[ "${DIR}" != "/" ]]; do
-            chmod 755 "${DIR}"
-            DIR="$(dirname "${DIR}")"
-        done
-        cp -df "${FILE}" "/${FILE}"
-        set +e
-        chmod 644 "/${FILE}" || true
-        set -e
+        cp -df --preserve=mode "${FILE}" "/${FILE}"
         log "$(ls -1 "/${FILE}" || echo "Error copying /${FILE}")"
     done
 done
-
-log "Making everything in /usr/local/bin executable"
-chmod a+rx /usr/local/bin/*
 
 if [[ -n "$(lspci | grep VGA.*Intel)" ]]; then
     log "Adding i915 to initramfs"
