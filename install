@@ -160,6 +160,8 @@ PACKAGES="
     ntfs-3g exfatprogs f2fs-tools
     git
     gnupg
+    iputils-ping
+    iputils-tracepath
     lsb-release
     man
     powerline powerline-gitstatus
