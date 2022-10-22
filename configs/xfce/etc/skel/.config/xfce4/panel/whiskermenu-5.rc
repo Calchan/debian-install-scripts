@@ -1,4 +1,5 @@
 favorites=xfce4-terminal-emulator.desktop,xfce4-web-browser.desktop,xfce4-file-manager.desktop,galculator.desktop
+favorites=xfce4-terminal-emulator.desktop,google-chrome.desktop,firefox-esr.desktop,xfce4-file-manager.desktop,libreoffice-startcenter.desktop,gimp.desktop,galculator.desktop,steam.desktop,heroic.desktop
 button-icon=/usr/share/icons/Adwaita/scalable/actions/open-menu-symbolic.svg
 hover-switch-category=true
 command-settings=xfce4-settings-manager
