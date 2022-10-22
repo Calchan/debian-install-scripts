@@ -14,6 +14,8 @@ done
 ping -c 1 deb.debian.org 2>&1 | head -n 2
 echo ">>> Update auto-upgrade script"
 curl -sL -o /usr/bin/calchan-upgrade https://raw.githubusercontent.com/Calchan/debian-install-scripts/main/configs/base/usr/bin/calchan-upgrade
+chmod 755 /usr/bin/calchan-upgrade
+ls -als /usr/bin/calchan-upgrade
 echo ">>> Update package sources"
 apt update -y -q
 echo ">>> Download new packages"
