@@ -52,11 +52,8 @@ while :; do
     show_line "Gnome" "gnome"
     echo
     echo "NVIDIA driver series (see https://www.nvidia.com/download/index.aspx for compatibility)"
-    echo "Proton experimental and recent Proton-GE will only work with 510+ drivers, but Proton "
-    echo "7.0 and below as well as older versions of Proton-GE will work with the 470 drivers)"
     show_line "510+ (all 1000-series cards and newer, some 700- to 900-series cards)" "nvidia"
-    show_line "470 (all 600-series cards and newer)" "nvidia470"
-    echo "(For older cards the built-in open-source driver is better)"
+    show_line "470 (all other 600- to 900-series cards, not compatible with everything)" "nvidia470"
     echo
     echo "Additional packages:"
     show_line "Google Chrome" "chrome"
