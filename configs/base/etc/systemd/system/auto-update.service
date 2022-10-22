@@ -4,9 +4,8 @@ Description=Update in progress, DO NOT INTERRUPT
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStartPre=-/usr/lib/apt/apt-helper wait-online
-ExecStart=/usr/bin/auto-update
-ExecStop=/usr/bin/auto-upgrade
+ExecStart=/usr/bin/calchan-update
+ExecStop=/usr/bin/calchan-upgrade
 TimeoutStopSec=600
 
 [Install]
