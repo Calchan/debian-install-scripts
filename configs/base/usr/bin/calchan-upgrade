@@ -4,13 +4,13 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 
 echo ">>> Saving manually installed packages"
-PACKAGES=$(apt list --manual-installed 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
+PACKAGES=$(apt-mark showmanual)
 echo ${PACKAGES}
 echo ">>> Upgrade packages"
-apt full-upgrade -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
+apt-get dist-upgrade -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
 echo ">>> Reinstalling possibly removed packages"
-apt install -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" ${PACKAGES} < /dev/null
+apt-get install -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" ${PACKAGES} < /dev/null
 echo ">>> Purge unneeded packages"
-apt autopurge -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
+apt-get autopurge -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
 echo ">>> Clean package cache"
-apt clean -q -y
+apt-get clean -q -y
