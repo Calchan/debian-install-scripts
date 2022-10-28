@@ -21,4 +21,4 @@ ls -als /usr/bin/calchan-upgrade
 echo ">>> Update package sources"
 apt-get update -y -q
 echo ">>> Download new packages"
-apt-get upgrade -d -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
+apt-get dist-upgrade -d -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
