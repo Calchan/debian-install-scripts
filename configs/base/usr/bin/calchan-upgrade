@@ -13,4 +13,4 @@ apt-get install -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="-
 echo ">>> Purge unneeded packages"
 apt-get autopurge -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
 echo ">>> Clean package cache"
-apt-get clean -q -y
+apt-get autoclean -q -y -o APT::Clean-Installed::="false" < /dev/null
