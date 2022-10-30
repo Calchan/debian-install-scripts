@@ -23,3 +23,5 @@ echo ">>> Update package sources"
 apt-get update -y -q
 echo ">>> Download new packages"
 apt-get dist-upgrade -d -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
+echo ">>> Clean package cache"
+apt-get autoclean -q -y -o APT::Clean-Installed::="false" < /dev/null
