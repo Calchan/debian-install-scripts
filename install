@@ -237,6 +237,7 @@ if is_selected "gnome"; then
         gnome-shell-extension-dash-to-panel
         gnome-shell-extension-manager
         gnome-shell-extension-pixelsaver
+        dconf-editor
         nautilus
         gnome-text-editor
         totem gstreamer1.0-vaapi
