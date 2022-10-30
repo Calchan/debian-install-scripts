@@ -3,12 +3,7 @@
 set -e
 export DEBIAN_FRONTEND=noninteractive
 
-echo ">>> Saving manually installed packages"
-PACKAGES=$(apt-mark showmanual)
-echo ${PACKAGES}
-echo ">>> Upgrade packages"
-apt-get dist-upgrade -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
-echo ">>> Reinstalling possibly removed packages"
-apt-get install -qq -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" ${PACKAGES} < /dev/null
-echo ">>> Purge unneeded packages"
-apt-get autopurge -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
+echo "Saving manually installed packages"
+apt-mark showmanual > /var/lib/apt/manually-installed
+echo "Upgrade packages"
+apt-get dist-upgrade -qq -m -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
