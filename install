@@ -162,10 +162,12 @@ PACKAGES="
     lsb-release
     man
     powerline powerline-gitstatus
+    pciutils
     python-is-python3
     sudo
     systemd-timesyncd
     tmux
+    usbutils
     vim-addon-manager vim-nox
     wget
 "
