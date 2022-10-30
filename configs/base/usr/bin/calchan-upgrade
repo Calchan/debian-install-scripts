@@ -9,7 +9,7 @@ echo ${PACKAGES}
 echo ">>> Upgrade packages"
 apt-get dist-upgrade -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
 echo ">>> Reinstalling possibly removed packages"
-apt-get install -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" ${PACKAGES} < /dev/null
+apt-get install -qq -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" ${PACKAGES} < /dev/null
 echo ">>> Purge unneeded packages"
 apt-get autopurge -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
 echo ">>> Clean package cache"
