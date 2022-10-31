@@ -9,11 +9,6 @@ DEB_ROOT="deb http://deb.debian.org/debian"
 SOURCES_LIST="/etc/apt/sources.list"
 SCRIPTS_PATH="/tmp/debian-install-scripts-main"
 
-log() {
-    echo "${@}"
-    echo "${@}" >> /root/install.log
-}
-
 is_selected() {
     if [[ " ${SELECTED_MODULES}" == *" ${1} "* ]]; then
         return 0
@@ -40,397 +35,402 @@ show_line() {
     fi
 }
 
-HIGHLIGHTED="done"
-tput civis
-while :; do
-    clear
-    echo "Selected features (use Up and Down arrows to navigate, Enter or Space to toggle):"
-    echo
-    echo "Environment:"
-    show_line "Minimal server" "server"
-    show_line "XFCE" "xfce"
-    show_line "Gnome" "gnome"
-    echo
-    echo "NVIDIA driver series (see https://www.nvidia.com/download/index.aspx for compatibility)"
-    show_line "510+ (all 1000-series cards and newer, some 700- to 900-series cards)" "nvidia"
-    show_line "470 (all other 600- to 900-series cards, not compatible with everything)" "nvidia470"
-    echo
-    echo "Additional packages:"
-    show_line "Google Chrome" "chrome"
-    show_line "Firefox" "firefox"
-    show_line "LibreOffice and some addons" "office"
-    show_line "Gimp and some plugins" "gimp"
-    show_line "Play Steam, Epic and GOG games, with tools and optimizations" "gaming"
-    show_line "Japanese keyboard" "japanese"
-    echo
-    show_line "Selection done, install now" "done"
-    read -srN1 KEY
-    ACTION=""
-    case "${KEY}" in
-        ' '|$'\n')
-            ACTION="Toggle"
-            ;;
-        $'\x1b')
-            read -srN1 KEY
-            if [[ "${KEY}" == "[" ]]; then
+setup() {
+    HIGHLIGHTED="done"
+    tput civis
+    while :; do
+        clear
+        echo "Selected features (use Up and Down arrows to navigate, Enter or Space to toggle):"
+        echo
+        echo "Environment:"
+        show_line "Minimal server" "server"
+        show_line "XFCE" "xfce"
+        show_line "Gnome" "gnome"
+        echo
+        echo "NVIDIA driver series (see https://www.nvidia.com/download/index.aspx for compatibility)"
+        show_line "510+ (all 1000-series cards and newer, some 700- to 900-series cards)" "nvidia"
+        show_line "470 (all other 600- to 900-series cards, not compatible with everything)" "nvidia470"
+        echo
+        echo "Additional packages:"
+        show_line "Google Chrome" "chrome"
+        show_line "Firefox" "firefox"
+        show_line "LibreOffice and some addons" "office"
+        show_line "Gimp and some plugins" "gimp"
+        show_line "Play Steam, Epic and GOG games, with tools and optimizations" "gaming"
+        show_line "Japanese keyboard" "japanese"
+        echo
+        show_line "Selection done, install now" "done"
+        read -srN1 KEY
+        ACTION=""
+        case "${KEY}" in
+            ' '|$'\n')
+                ACTION="Toggle"
+                ;;
+            $'\x1b')
                 read -srN1 KEY
-                case "${KEY}" in
-                    'A')
-                        ACTION="Up"
+                if [[ "${KEY}" == "[" ]]; then
+                    read -srN1 KEY
+                    case "${KEY}" in
+                        'A')
+                            ACTION="Up"
+                            ;;
+                        'B')
+                            ACTION="Down"
+                            ;;
+                    esac
+                    # Flush out other sequences
+                    set +e
+                    read -srn4 -t .1
+                    set -e
+                fi
+                ;;
+        esac
+        NEW_HIGHLIGHTED=""
+        case "${ACTION}" in
+            Up)
+                set +e
+                NEW_HIGHLIGHTED="$(grep -Eo "\w+ ${HIGHLIGHTED} " <<< " ${AVAILABLE_MODULES} done ")"
+                set -e
+                if [[ -n "${NEW_HIGHLIGHTED}" ]]; then
+                    HIGHLIGHTED="$(echo "$(cut -d ' ' -f 1 <<< "${NEW_HIGHLIGHTED}")")"
+                fi
+                ;;
+            Down)
+                set +e
+                NEW_HIGHLIGHTED="$(grep -Eo " ${HIGHLIGHTED} \w+" <<< " ${AVAILABLE_MODULES} done ")"
+                set -e
+                if [[ -n "${NEW_HIGHLIGHTED}" ]]; then
+                    HIGHLIGHTED="$(echo "$(cut -d ' ' -f 3 <<< "${NEW_HIGHLIGHTED}")")"
+                fi
+                ;;
+            Toggle)
+                case "${HIGHLIGHTED}" in
+                    done)
+                        clear
+                        break
                         ;;
-                    'B')
-                        ACTION="Down"
+                    server)
+                        SELECTED_MODULES=" server "
+                        ;;
+                    xfce|gnome)
+                        SELECTED_MODULES="${SELECTED_MODULES/ server }"
+                        SELECTED_MODULES="${SELECTED_MODULES/ xfce }"
+                        SELECTED_MODULES="${SELECTED_MODULES/ gnome }"
+                        SELECTED_MODULES="${SELECTED_MODULES/ desktop }"
+                        SELECTED_MODULES=" ${HIGHLIGHTED} desktop ${SELECTED_MODULES}"
+                        ;;
+                    nvidia|nvidia470)
+                        if is_selected "${HIGHLIGHTED}"; then
+                            SELECTED_MODULES="${SELECTED_MODULES/ ${HIGHLIGHTED} / }"
+                        else
+                            SELECTED_MODULES="${SELECTED_MODULES/ nvidia / }"
+                            SELECTED_MODULES="${SELECTED_MODULES/ nvidia470 / }"
+                            SELECTED_MODULES="${SELECTED_MODULES}${HIGHLIGHTED} "
+                        fi
+                        ;;
+                    *)
+                        if is_selected "${HIGHLIGHTED}"; then
+                            SELECTED_MODULES="${SELECTED_MODULES/ ${HIGHLIGHTED} / }"
+                        else
+                            SELECTED_MODULES="${SELECTED_MODULES}${HIGHLIGHTED} "
+                        fi
                         ;;
                 esac
-                # Flush out other sequences
-                set +e
-                read -srn4 -t .1
-                set -e
-            fi
-            ;;
-    esac
-    NEW_HIGHLIGHTED=""
-    case "${ACTION}" in
-        Up)
-            set +e
-            NEW_HIGHLIGHTED="$(grep -Eo "\w+ ${HIGHLIGHTED} " <<< " ${AVAILABLE_MODULES} done ")"
-            set -e
-            if [[ -n "${NEW_HIGHLIGHTED}" ]]; then
-                HIGHLIGHTED="$(echo "$(cut -d ' ' -f 1 <<< "${NEW_HIGHLIGHTED}")")"
-            fi
-            ;;
-        Down)
-            set +e
-            NEW_HIGHLIGHTED="$(grep -Eo " ${HIGHLIGHTED} \w+" <<< " ${AVAILABLE_MODULES} done ")"
-            set -e
-            if [[ -n "${NEW_HIGHLIGHTED}" ]]; then
-                HIGHLIGHTED="$(echo "$(cut -d ' ' -f 3 <<< "${NEW_HIGHLIGHTED}")")"
-            fi
-            ;;
-        Toggle)
-            case "${HIGHLIGHTED}" in
-                done)
-                    clear
-                    break
-                    ;;
-                server)
-                    SELECTED_MODULES=" server "
-                    ;;
-                xfce|gnome)
-                    SELECTED_MODULES="${SELECTED_MODULES/ server }"
-                    SELECTED_MODULES="${SELECTED_MODULES/ xfce }"
-                    SELECTED_MODULES="${SELECTED_MODULES/ gnome }"
-                    SELECTED_MODULES="${SELECTED_MODULES/ desktop }"
-                    SELECTED_MODULES=" ${HIGHLIGHTED} desktop ${SELECTED_MODULES}"
-                    ;;
-                nvidia|nvidia470)
-                    if is_selected "${HIGHLIGHTED}"; then
-                        SELECTED_MODULES="${SELECTED_MODULES/ ${HIGHLIGHTED} / }"
-                    else
-                        SELECTED_MODULES="${SELECTED_MODULES/ nvidia / }"
-                        SELECTED_MODULES="${SELECTED_MODULES/ nvidia470 / }"
-                        SELECTED_MODULES="${SELECTED_MODULES}${HIGHLIGHTED} "
-                    fi
-                    ;;
-                *)
-                    if is_selected "${HIGHLIGHTED}"; then
-                        SELECTED_MODULES="${SELECTED_MODULES/ ${HIGHLIGHTED} / }"
-                    else
-                        SELECTED_MODULES="${SELECTED_MODULES}${HIGHLIGHTED} "
-                    fi
-                    ;;
-            esac
-            ;;
-    esac
-done
+                ;;
+        esac
+    done
+    tput cnorm
+}
 
-log "Selected modules:${SELECTED_MODULES}"
+install() {
+    echo "Selected modules:${SELECTED_MODULES}"
 
-tput cnorm
-
-PACKAGES="
-    apt-transport-https
-    bash-completion
-    ca-certificates
-    curl
-    firmware-linux
-    ntfs-3g exfatprogs f2fs-tools
-    git
-    gnupg
-    iputils-ping
-    iputils-tracepath
-    lsb-release
-    man
-    powerline powerline-gitstatus
-    pciutils
-    python-is-python3
-    sudo
-    systemd-timesyncd
-    tmux
-    usbutils
-    vim-addon-manager vim-nox
-    wget
-"
-
-if is_selected "server"; then
-    PACKAGES+="
-        ifupdown
-        openssh-server
+    PACKAGES="
+        apt-transport-https
+        bash-completion
+        ca-certificates
+        curl
+        firmware-linux
+        ntfs-3g exfatprogs f2fs-tools
+        git
+        gnupg
+        iputils-ping
+        iputils-tracepath
+        lsb-release
+        man
+        powerline powerline-gitstatus
+        pciutils
+        python-is-python3
+        sudo
+        systemd-timesyncd
+        tmux
+        usbutils
+        vim-addon-manager vim-nox
+        wget
     "
-fi
 
-if is_selected "desktop"; then
-    PACKAGES+="
-        libspa-0.2-bluetooth
-        gvfs-backends gvfs-fuse
-        unrar unzip
-        fonts-noto
-        wireplumber
-        firmware-ath9k-htc
-        firmware-atheros
-        firmware-b43-installer
-        firmware-b43legacy-installer
-        firmware-bnx2
-        firmware-bnx2x
-        firmware-brcm80211
-        firmware-cavium
-        firmware-intel-sound
-        firmware-iwlwifi
-        firmware-libertas
-        firmware-myricom
-        firmware-netronome
-        firmware-netxen
-        firmware-qlogic
-        firmware-realtek
-        firmware-sof-signed
-        firmware-ti-connectivity
-        firmware-zd1211
-    "
-fi
-
-if is_selected "xfce"; then
-    PACKAGES+="
-        xfce4
-        elementary-xfce-icon-theme
-        xfce4-whiskermenu-plugin
-        xfce4-notifyd
-        xfce4-power-manager
-        network-manager-gnome
-        blueman
-        xfce4-terminal
-        xfce4-screenshooter
-        tumbler-plugins-extra
-        thunar-archive-plugin
-        ristretto
-        mpv
-        seahorse
-        mousepad
-        galculator
-    "
-fi
-
-if is_selected "gnome"; then
-    PACKAGES+="
-        gnome-shell
-        gnome-tweaks
-        gnome-shell-extension-arc-menu
-        gnome-shell-extension-dash-to-panel
-        gnome-shell-extension-manager
-        gnome-shell-extension-pixelsaver
-        dconf-editor
-        nautilus
-        gnome-text-editor
-        totem gstreamer1.0-vaapi
-        eog
-        gnome-screenshot
-        gnome-calculator
-        file-roller
-        nautilus-extension-gnome-terminal
-    "
-fi
-
-if is_selected "firefox"; then
-    # TODO automatically add languages
-    PACKAGES+="
-        firefox-esr
-    "
-fi
-
-if is_selected "japanese"; then
-    PACKAGES+="
-        fcitx5-mozc
-    "
-    if is_selected "gnome"; then
+    if is_selected "server"; then
         PACKAGES+="
-            gnome-shell-extension-kimpanel
+            ifupdown
+            openssh-server
         "
     fi
-fi
 
-if is_selected "office"; then
-    # TODO automatically add more lightproof languages?
-    PACKAGES+="
-        libreoffice libreoffice-lightproof-en libreoffice-style-elementary
-        gstreamer1.0-vaapi
-    "
-fi
-
-if is_selected "gimp"; then
-    PACKAGES+="
-        gimp gimp-data-extras gimp-gmic gimp-lensfun gimp-plugin-registry gimp-texturize
-    "
-fi
-
-if is_selected "nvidia"; then
-    PACKAGES+="
-        nvidia-tesla-driver
-    "
-fi
-
-if is_selected "nvidia470"; then
-    PACKAGES+="
-        nvidia-tesla-470-driver
-    "
-fi
-
-if [[ -n "$(lspci | grep VGA.*Intel)" ]]; then
-    PACKAGES+="
-        i965-va-driver-shaders
-        intel-media-va-driver-non-free
-    "
-    echo i915 >> /etc/initramfs-tools/modules
-fi
-
-if is_selected "gaming"; then
-    PACKAGES+="
-        mangohud:amd64 mangohud:i386 protontricks steam
-    "
-    echo steam steam/license note "" | debconf-set-selections
-    echo steam steam/question select "I AGREE" | debconf-set-selections
-fi
-
-echo "${DEB_ROOT} testing main contrib non-free" > "${SOURCES_LIST}"
-echo "${DEB_ROOT}-security testing-security main contrib non-free" >> "${SOURCES_LIST}"
-echo "${DEB_ROOT} testing-updates main contrib non-free" >> "${SOURCES_LIST}"
-log "Apt sources:"
-log "$(cat "${SOURCES_LIST}")"
-
-if is_selected "gaming"; then
-    log "Adding i386 multilib"
-    dpkg --add-architecture i386
-fi
-log "Updating apt package index"
-apt update
-
-log "Cleaning up base install"
-apt-mark auto $(apt list --manual-installed 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
-apt autoremove -y
-
-log "Upgrading base install"
-apt install -y --reinstall $(apt list --upgradable 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
-apt autoremove -y
-
-log "Installing packages:"${PACKAGES}
-apt install -y ${PACKAGES}
-
-log "Copying skel files for root user"
-cd "/etc/skel"
-for FILE in $(find . -type f,l); do
-    mkdir -p "$(dirname "/root/${FILE}")"
-    cp -df "${FILE}" "/root/${FILE}"
-    log "$(ls -1 "/root/${FILE}" || echo "Error copying /root/${FILE}")"
-done
-cd "${SCRIPTS_PATH}/configs/base/etc/skel"
-for FILE in $(find . -type f,l); do
-    mkdir -p "$(dirname "/root/${FILE}")"
-    cp -df "${FILE}" "/root/${FILE}"
-    log "$(ls -1 "/root/${FILE}" || echo "Error copying /root/${FILE}")"
-done
-log "Resetting permisions in /root"
-mkdir -p /root/.ssh
-chown -R root:root /root
-find /root -type d -exec chmod 0750 \{\} \;
-find /root -type f -exec chmod 0640 \{\} \;
-chmod -R go-rwx /root/.ssh
-
-for MODULE in base ${SELECTED_MODULES}; do
-    if [[ ! -d "${SCRIPTS_PATH}/configs/${MODULE}" ]]; then
-        log "No config for module ${MODULE}"
-        continue
+    if is_selected "desktop"; then
+        PACKAGES+="
+            libspa-0.2-bluetooth
+            gvfs-backends gvfs-fuse
+            unrar unzip
+            fonts-noto
+            wireplumber
+            firmware-ath9k-htc
+            firmware-atheros
+            firmware-b43-installer
+            firmware-b43legacy-installer
+            firmware-bnx2
+            firmware-bnx2x
+            firmware-brcm80211
+            firmware-cavium
+            firmware-intel-sound
+            firmware-iwlwifi
+            firmware-libertas
+            firmware-myricom
+            firmware-netronome
+            firmware-netxen
+            firmware-qlogic
+            firmware-realtek
+            firmware-sof-signed
+            firmware-ti-connectivity
+            firmware-zd1211
+        "
     fi
-    log "Copying configs for module ${MODULE}"
-    cd "${SCRIPTS_PATH}/configs/${MODULE}"
-    for FILE in $(find * -type f,l); do
-        mkdir -p "/$(dirname "/${FILE}")"
-        cp -df --preserve=mode "${FILE}" "/${FILE}"
-        log "$(ls -1 "/${FILE}" || echo "Error copying /${FILE}")"
-    done
-done
 
-if [[ -n "$(lspci | grep VGA.*Intel)" ]]; then
-    log "Adding i915 to initramfs"
-    echo i915 >> /etc/initramfs-tools/modules
-fi
+    if is_selected "xfce"; then
+        PACKAGES+="
+            xfce4
+            elementary-xfce-icon-theme
+            xfce4-whiskermenu-plugin
+            xfce4-notifyd
+            xfce4-power-manager
+            network-manager-gnome
+            blueman
+            xfce4-terminal
+            xfce4-screenshooter
+            tumbler-plugins-extra
+            thunar-archive-plugin
+            ristretto
+            mpv
+            seahorse
+            mousepad
+            galculator
+        "
+    fi
 
-if is_selected "xfce"; then
-    update-alternatives --install /usr/share/images/desktop-base/desktop-background \
-        desktop-background "/usr/share/images/gray_1280x720.png" 90
-fi
+    if is_selected "gnome"; then
+        PACKAGES+="
+            gnome-shell
+            gnome-tweaks
+            gnome-shell-extension-arc-menu
+            gnome-shell-extension-dash-to-panel
+            gnome-shell-extension-manager
+            gnome-shell-extension-pixelsaver
+            dconf-editor
+            nautilus
+            gnome-text-editor
+            totem gstreamer1.0-vaapi
+            eog
+            gnome-screenshot
+            gnome-calculator
+            file-roller
+            nautilus-extension-gnome-terminal
+        "
+    fi
 
-if is_selected "chrome"; then
-    cd /tmp
-    log "Downloading Google Chrome .deb"
-    wget -O /tmp/chrome.deb \
-        https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    log "Installing Google Chrome .deb"
-    apt install -y /tmp/chrome.deb
-fi
+    if is_selected "firefox"; then
+        # TODO automatically add languages
+        PACKAGES+="
+            firefox-esr
+        "
+    fi
 
-if is_selected "gaming"; then
-    log "Installing Heroic"
-    /usr/bin/update-heroic
-    for USERDIR in /home/*; do
-        log "Adding ${USERNAME} to games group"
-        USERNAME=$(basename "${USERDIR}")
-        gpasswd -a "${USERNAME}" games
-    done
-    log "Disabling mitigations"
-    sed \
-        's/^\(GRUB_CMDLINE_LINUX_DEFAULT=".*\)"/\1 mitigations=off i915.mitigations=off"/' -i \
-        /etc/default/grub.d/local.cfg
-fi
+    if is_selected "japanese"; then
+        PACKAGES+="
+            fcitx5-mozc
+        "
+        if is_selected "gnome"; then
+            PACKAGES+="
+                gnome-shell-extension-kimpanel
+            "
+        fi
+    fi
 
-cd /etc/skel
-for USERDIR in /home/*; do
-    USERNAME=$(basename "${USERDIR}")
-    log "Copying skel files for user ${USERNAME}"
+    if is_selected "office"; then
+        # TODO automatically add more lightproof languages?
+        PACKAGES+="
+            libreoffice libreoffice-lightproof-en libreoffice-style-elementary
+            gstreamer1.0-vaapi
+        "
+    fi
+
+    if is_selected "gimp"; then
+        PACKAGES+="
+            gimp gimp-data-extras gimp-gmic gimp-lensfun gimp-plugin-registry gimp-texturize
+        "
+    fi
+
+    if is_selected "nvidia"; then
+        PACKAGES+="
+            nvidia-tesla-driver
+        "
+    fi
+
+    if is_selected "nvidia470"; then
+        PACKAGES+="
+            nvidia-tesla-470-driver
+        "
+    fi
+
+    if [[ -n "$(lspci | grep VGA.*Intel)" ]]; then
+        PACKAGES+="
+            i965-va-driver-shaders
+            intel-media-va-driver-non-free
+        "
+        echo i915 >> /etc/initramfs-tools/modules
+    fi
+
+    if is_selected "gaming"; then
+        PACKAGES+="
+            mangohud:amd64 mangohud:i386 protontricks steam
+        "
+        echo steam steam/license note "" | debconf-set-selections
+        echo steam steam/question select "I AGREE" | debconf-set-selections
+    fi
+
+    echo "${DEB_ROOT} testing main contrib non-free" > "${SOURCES_LIST}"
+    echo "${DEB_ROOT}-security testing-security main contrib non-free" >> "${SOURCES_LIST}"
+    echo "${DEB_ROOT} testing-updates main contrib non-free" >> "${SOURCES_LIST}"
+    echo "Apt sources:"
+    echo "$(cat "${SOURCES_LIST}")"
+
+    if is_selected "gaming"; then
+        echo "Adding i386 multilib"
+        dpkg --add-architecture i386
+    fi
+    echo "Updating apt package index"
+    apt update
+
+    echo "Cleaning up base install"
+    apt-mark auto $(apt list --manual-installed 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
+    apt autoremove -y
+
+    echo "Upgrading base install"
+    apt install -y --reinstall $(apt list --upgradable 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
+    apt autoremove -y
+
+    echo "Installing packages:"${PACKAGES}
+    apt install -y ${PACKAGES}
+
+    echo "Copying skel files for root user"
+    cd "/etc/skel"
     for FILE in $(find . -type f,l); do
-        mkdir -p "$(dirname "${USERDIR}/${FILE}")"
-        cp -df "${FILE}" "${USERDIR}/${FILE}"
-        log "$(ls -1 "${USERDIR}/${FILE}" || echo "Error copying ${USERDIR}/${FILE}")"
+        mkdir -p "$(dirname "/root/${FILE}")"
+        cp -df "${FILE}" "/root/${FILE}"
+        echo "$(ls -1 "/root/${FILE}" || echo "Error copying /root/${FILE}")"
     done
-    log "Resetting permissions in ${USERDIR}"
-    mkdir -p "${USERDIR}/.ssh"
-    chown -R "${USERNAME}":"${USERNAME}" "${USERDIR}"
-    find "${USERDIR}" -type d -exec chmod 0750 \{\} \;
-    find "${USERDIR}" -type f -exec chmod 0640 \{\} \;
-    chmod -R go-rwx "${USERDIR}/.ssh"
-done
+    cd "${SCRIPTS_PATH}/configs/base/etc/skel"
+    for FILE in $(find . -type f,l); do
+        mkdir -p "$(dirname "/root/${FILE}")"
+        cp -df "${FILE}" "/root/${FILE}"
+        echo "$(ls -1 "/root/${FILE}" || echo "Error copying /root/${FILE}")"
+    done
+    echo "Resetting permisions in /root"
+    mkdir -p /root/.ssh
+    chown -R root:root /root
+    find /root -type d -exec chmod 0750 \{\} \;
+    find /root -type f -exec chmod 0640 \{\} \;
+    chmod -R go-rwx /root/.ssh
 
-log "Removing undesirables"
-apt purge -y ibus plymouth yelp termit tilix xterm zutty
-apt autoremove -y
+    for MODULE in base ${SELECTED_MODULES}; do
+        if [[ ! -d "${SCRIPTS_PATH}/configs/${MODULE}" ]]; then
+            echo "No config for module ${MODULE}"
+            continue
+        fi
+        echo "Copying configs for module ${MODULE}"
+        cd "${SCRIPTS_PATH}/configs/${MODULE}"
+        for FILE in $(find * -type f,l); do
+            mkdir -p "/$(dirname "/${FILE}")"
+            cp -df --preserve=mode "${FILE}" "/${FILE}"
+            echo "$(ls -1 "/${FILE}" || echo "Error copying /${FILE}")"
+        done
+    done
 
-log "Removing residual configs"
-apt purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
+    if [[ -n "$(lspci | grep VGA.*Intel)" ]]; then
+        echo "Adding i915 to initramfs"
+        echo i915 >> /etc/initramfs-tools/modules
+    fi
 
-log "Enable powerline globally"
-vim-addons -w install powerline
-log "Final grub update"
-update-grub
-log "Final initramfs update"
-update-initramfs -k all -u
-cd
-rm -rf /tmp/*
+    if is_selected "xfce"; then
+        update-alternatives --install /usr/share/images/desktop-base/desktop-background \
+            desktop-background "/usr/share/images/gray_1280x720.png" 90
+    fi
 
+    if is_selected "chrome"; then
+        cd /tmp
+        echo "Downloading Google Chrome .deb"
+        wget -O /tmp/chrome.deb \
+            https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        echo "Installing Google Chrome .deb"
+        apt install -y /tmp/chrome.deb
+    fi
+
+    if is_selected "gaming"; then
+        echo "Installing Heroic"
+        /usr/bin/update-heroic
+        for USERDIR in /home/*; do
+            echo "Adding ${USERNAME} to games group"
+            USERNAME=$(basename "${USERDIR}")
+            gpasswd -a "${USERNAME}" games
+        done
+        echo "Disabling mitigations"
+        sed \
+            's/^\(GRUB_CMDLINE_LINUX_DEFAULT=".*\)"/\1 mitigations=off i915.mitigations=off"/' -i \
+            /etc/default/grub.d/local.cfg
+    fi
+
+    cd /etc/skel
+    for USERDIR in /home/*; do
+        USERNAME=$(basename "${USERDIR}")
+        echo "Copying skel files for user ${USERNAME}"
+        for FILE in $(find . -type f,l); do
+            mkdir -p "$(dirname "${USERDIR}/${FILE}")"
+            cp -df "${FILE}" "${USERDIR}/${FILE}"
+            echo "$(ls -1 "${USERDIR}/${FILE}" || echo "Error copying ${USERDIR}/${FILE}")"
+        done
+        echo "Resetting permissions in ${USERDIR}"
+        mkdir -p "${USERDIR}/.ssh"
+        chown -R "${USERNAME}":"${USERNAME}" "${USERDIR}"
+        find "${USERDIR}" -type d -exec chmod 0750 \{\} \;
+        find "${USERDIR}" -type f -exec chmod 0640 \{\} \;
+        chmod -R go-rwx "${USERDIR}/.ssh"
+    done
+
+    echo "Removing undesirables"
+    apt purge -y ibus plymouth yelp termit tilix xterm zutty
+    apt autoremove -y
+
+    echo "Removing residual configs"
+    apt purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
+
+    echo "Enable powerline globally"
+    vim-addons -w install powerline
+    echo "Final grub update"
+    update-grub
+    echo "Final initramfs update"
+    update-initramfs -k all -u
+    cd
+    rm -rf /tmp/*
+}
+
+setup
+install | tee /var/log/calchan-install.log
 echo "All done, type 'poweroff' at the prompt and remove the USB stick"
