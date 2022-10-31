@@ -35,5 +35,5 @@ and `dd` or `cp` it to a USB stick at least 1GB in size.
 
 3. Install as you would normally do.
 
-4. When you get to the `Installation complete` page, hit ALT+F2, then Enter, and type finish at the
-   prompt. Follow the instructions.
+4. When you get to the `Installation complete` page, hit ALT+F2, then Enter, and type `finish` at
+   the prompt. Follow the instructions.
