@@ -317,18 +317,18 @@ install() {
         dpkg --add-architecture i386
     fi
     echo "Updating apt package index"
-    apt update
+    apt-get update -q
 
     echo "Cleaning up base install"
-    apt-mark auto $(apt list --manual-installed 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
-    apt autoremove -y
+    apt-mark auto $(apt-mark showmanual)
+    apt-get autopurge -q -y
 
     echo "Upgrading base install"
-    apt install -y --reinstall $(apt list --upgradable 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
-    apt autoremove -y
+    apt-get install -y --reinstall $(apt list --upgradable 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
+    apt-get autopurge -q -y
 
     echo "Installing packages:"${PACKAGES}
-    apt install -y ${PACKAGES}
+    apt-get install -q -y ${PACKAGES}
 
     echo "Copying skel files for root user"
     cd "/etc/skel"
@@ -380,7 +380,7 @@ install() {
         wget -O /tmp/chrome.deb \
             https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         echo "Installing Google Chrome .deb"
-        apt install -y /tmp/chrome.deb
+        apt-get install -q -y /tmp/chrome.deb
     fi
 
     if is_selected "gaming"; then
@@ -415,11 +415,11 @@ install() {
     done
 
     echo "Removing undesirables"
-    apt purge -y ibus plymouth yelp termit tilix xterm zutty
-    apt autoremove -y
+    apt-get purge -q -y ibus plymouth yelp termit tilix xterm zutty
+    apt-get autopurge -q -y
 
     echo "Removing residual configs"
-    apt purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
+    apt-get purge -q -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
 
     echo "Enable powerline globally"
     vim-addons -w install powerline
