@@ -29,9 +29,9 @@ Note. These are minimal instructions until I have time to write something better
 and `dd` or `cp` it to a USB stick at least 1GB in size.
 
 2. Boot the ISO
-    - If using BIOS, select `Help`, then type `install url=calchan.github.io/debian` at the prompt.
-    - If using UEFI, highlight `Install`, hit the E key, add `url=calchan.github.io/debian` at the
-      end of the Linux command line (the one which starts with `linux`), then hit F10 or CTRL-X.
+    - If using BIOS, select `Help`, then type `install url=calchan.org/debian` at the prompt.
+    - If using UEFI, highlight `Install`, hit the E key, add `url=calchan.org/debian` at the end of
+      the Linux command line (the one which starts with `linux`), then hit F10 or CTRL-X.
 
 3. Install as you would normally do.
 
