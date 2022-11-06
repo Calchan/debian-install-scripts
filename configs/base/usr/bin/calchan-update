@@ -13,6 +13,8 @@ curl -sL -o /usr/bin/calchan-update https://raw.githubusercontent.com/Calchan/de
 chmod 755 /usr/bin/calchan-update
 curl -sL -o /usr/bin/calchan-upgrade https://raw.githubusercontent.com/Calchan/debian-install-scripts/main/configs/base/usr/bin/calchan-upgrade
 chmod 755 /usr/bin/calchan-upgrade
+curl -sL -o /etc/systemd/system/calchan-update.service https://raw.githubusercontent.com/Calchan/debian-install-scripts/main/configs/base/etc/systemd/system/calchan-update.service
+chmod 644 /etc/systemd/system/calchan-update.service
 echo "Upgrade packages in case previous upgrade on shutdown failed"
 apt-get dist-upgrade -qq -m -f -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" < /dev/null
 echo "Reinstall wrongly removed packages"
