@@ -4,7 +4,7 @@ TMP_DIR=$(mktemp -d)
 cd "${TMP_DIR}"
 RELEASE="$(curl -sL https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest | \
     sed -n 's|.*Heroic-Games-Launcher/HeroicGamesLauncher/releases/tag/v\([^";&]*\)[";&].*|\1|p' | \
-    tail -n 1)"
+    sort -uV | tail -n 1)"
 if [[ "$(apt list --installed heroic 2>/dev/null | sed -n 's|[^ ]* \([^ ]*\).*|\1|p')" == \
         "${RELEASE}" ]]; then
     echo "Heroic is up to date (v${RELEASE})"
