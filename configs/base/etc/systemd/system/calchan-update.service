@@ -6,7 +6,7 @@ Type=oneshot
 RemainAfterExit=true
 ExecStart=/usr/bin/calchan-update
 ExecStop=/usr/bin/calchan-upgrade
-TimeoutStopSec=90
+TimeoutStopSec=180
 
 [Install]
 WantedBy=multi-user.target
