@@ -3,7 +3,7 @@
 set -e
 umask 0022
 
-AVAILABLE_MODULES="server xfce gnome nvidia nvidia470 chrome firefox office gimp gaming japanese"
+AVAILABLE_MODULES="server xfce gnome nvidia nvidia-legacy chrome firefox office gimp gaming japanese"
 SELECTED_MODULES=" xfce desktop chrome office "
 DEB_ROOT="deb http://deb.debian.org/debian"
 SOURCES_LIST="/etc/apt/sources.list"
@@ -47,9 +47,9 @@ setup() {
         show_line "XFCE" "xfce"
         show_line "Gnome" "gnome"
         echo
-        echo "NVIDIA driver series (see https://www.nvidia.com/download/index.aspx for compatibility)"
-        show_line "510+ (all 1000-series cards and newer, some 700- to 900-series cards)" "nvidia"
-        show_line "470 (all other 600- to 900-series cards, not compatible with everything)" "nvidia470"
+        echo "NVIDIA graphics driver (see https://www.nvidia.com/download/index.aspx for compatibility)"
+        show_line "All 1000-series cards and newer, some 700- to 900-series cards" "nvidia"
+        show_line "Older cards" "nvidia-legacy"
         echo
         echo "Additional packages:"
         show_line "Google Chrome" "chrome"
@@ -119,12 +119,12 @@ setup() {
                         SELECTED_MODULES="${SELECTED_MODULES/ desktop }"
                         SELECTED_MODULES=" ${HIGHLIGHTED} desktop ${SELECTED_MODULES}"
                         ;;
-                    nvidia|nvidia470)
+                    nvidia|nvidia-legacy)
                         if is_selected "${HIGHLIGHTED}"; then
                             SELECTED_MODULES="${SELECTED_MODULES/ ${HIGHLIGHTED} / }"
                         else
                             SELECTED_MODULES="${SELECTED_MODULES/ nvidia / }"
-                            SELECTED_MODULES="${SELECTED_MODULES/ nvidia470 / }"
+                            SELECTED_MODULES="${SELECTED_MODULES/ nvidia-legacy / }"
                             SELECTED_MODULES="${SELECTED_MODULES}${HIGHLIGHTED} "
                         fi
                         ;;
@@ -282,13 +282,13 @@ install() {
 
     if is_selected "nvidia"; then
         PACKAGES+="
-            nvidia-tesla-driver
+            nvidia-driver
         "
     fi
 
-    if is_selected "nvidia470"; then
+    if is_selected "nvidia-legacy"; then
         PACKAGES+="
-            nvidia-tesla-470-driver
+            nvidia-legacy-390xx-driver
         "
     fi
 
