@@ -308,9 +308,9 @@ install() {
         echo steam steam/question select "I AGREE" | debconf-set-selections
     fi
 
-    echo "${DEB_ROOT} testing main contrib non-free" > "${SOURCES_LIST}"
-    echo "${DEB_ROOT}-security testing-security main contrib non-free" >> "${SOURCES_LIST}"
-    echo "${DEB_ROOT} testing-updates main contrib non-free" >> "${SOURCES_LIST}"
+    echo "${DEB_ROOT} testing main contrib non-free non-free-firmware" > "${SOURCES_LIST}"
+    echo "${DEB_ROOT}-security testing-security main contrib non-free non-free-firmware" >> "${SOURCES_LIST}"
+    echo "${DEB_ROOT} testing-updates main contrib non-free non-free-firmware" >> "${SOURCES_LIST}"
     echo "Apt sources:"
     echo "$(cat "${SOURCES_LIST}")"
 
