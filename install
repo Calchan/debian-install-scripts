@@ -3,7 +3,7 @@
 set -e
 umask 0022
 
-AVAILABLE_MODULES="server xfce gnome nvidia nvidia-legacy chrome firefox office gimp gaming japanese"
+AVAILABLE_MODULES="server xfce gnome nvidia chrome firefox office gimp gaming japanese"
 SELECTED_MODULES=" xfce desktop chrome office "
 DEB_ROOT="deb http://deb.debian.org/debian"
 SOURCES_LIST="/etc/apt/sources.list"
@@ -49,7 +49,6 @@ setup() {
         echo
         echo "NVIDIA graphics driver (see https://www.nvidia.com/download/index.aspx for compatibility)"
         show_line "All 1000-series cards and newer, some 700- to 900-series cards" "nvidia"
-        show_line "Older cards" "nvidia-legacy"
         echo
         echo "Additional packages:"
         show_line "Google Chrome" "chrome"
@@ -118,15 +117,6 @@ setup() {
                         SELECTED_MODULES="${SELECTED_MODULES/ gnome }"
                         SELECTED_MODULES="${SELECTED_MODULES/ desktop }"
                         SELECTED_MODULES=" ${HIGHLIGHTED} desktop ${SELECTED_MODULES}"
-                        ;;
-                    nvidia|nvidia-legacy)
-                        if is_selected "${HIGHLIGHTED}"; then
-                            SELECTED_MODULES="${SELECTED_MODULES/ ${HIGHLIGHTED} / }"
-                        else
-                            SELECTED_MODULES="${SELECTED_MODULES/ nvidia / }"
-                            SELECTED_MODULES="${SELECTED_MODULES/ nvidia-legacy / }"
-                            SELECTED_MODULES="${SELECTED_MODULES}${HIGHLIGHTED} "
-                        fi
                         ;;
                     *)
                         if is_selected "${HIGHLIGHTED}"; then
@@ -283,12 +273,6 @@ install() {
     if is_selected "nvidia"; then
         PACKAGES+="
             nvidia-driver
-        "
-    fi
-
-    if is_selected "nvidia-legacy"; then
-        PACKAGES+="
-            nvidia-legacy-390xx-driver
         "
     fi
 
