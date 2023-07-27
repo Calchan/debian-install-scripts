@@ -1,0 +1,84 @@
+#! /bin/bash
+
+set -e
+
+DEB_ROOT="deb http://deb.debian.org/debian"
+DEB_REPOS="main contrib non-free non-free-firmware"
+SOURCES_LIST="/etc/apt/sources.list"
+
+install() {
+    PACKAGES="
+        ca-certificates
+        curl
+        firmware-linux
+        nano
+        lsb-release
+        openssh-server
+        systemd-timesyncd
+    "
+
+    echo "${DEB_ROOT} stable ${DEB_REPOS}" > "${SOURCES_LIST}"
+    echo "${DEB_ROOT}-security stable-security ${DEB_REPOS}" >> "${SOURCES_LIST}"
+    echo "${DEB_ROOT} stable-updates ${DEB_REPOS}" >> "${SOURCES_LIST}"
+    echo "Apt sources:"
+    echo "$(cat "${SOURCES_LIST}")"
+
+    echo "Updating apt package index"
+    apt-get update -y
+
+    echo "Cleaning up base install"
+    apt-mark auto $(apt-mark showmanual)
+    apt-mark manual ifupdown
+    apt-get autopurge -y
+
+    echo "Upgrading base install"
+    apt-get install -y --reinstall $(apt list --upgradable 2>/dev/null | tail -n +2 | cut -d '/' -f 1)
+    apt-get autopurge -y
+
+    echo "Installing packages:"${PACKAGES}
+    apt-get install -y ${PACKAGES}
+
+    echo "Removing residual configs"
+    apt-get purge -y $(dpkg -l | sed -n 's/^rc *\([^ ]*\).*/\1/p')
+
+    echo "Add config for systemd-zram-generator (it needs to be installed though)"
+    mkdir -p /etc/systemd/zram-generator.conf.d
+    echo "[zram0]\nzram-size = ram - 1024" > /etc/systemd/zram-generator.conf.d/local.conf
+
+    echo "Add config to disable IPv6 for Kubernetes but leave it commented out"
+    echo "#net.ipv6.conf.all.disable_ipv6 = 1" > /etc/sysctl.d/98-disable-ipv6.conf
+
+    if [[ -n "${ip}" ]]; then
+        if [[ "${ip}" == "${ip%/*}" ]]; then
+            ip+="/24"
+        fi
+        if [[ -z "${gw}" ]]; then
+            gw="$(sed 's|[0-9]*/[0-9]*|1|'i <<< ${ip})"
+        fi
+        echo "Using address ${ip} gateway ${gw}"
+        sed "s| dhcp *$| static\n    address ${ip}\n    gateway ${gw}|" \
+            -i etc/network/interfaces
+    fi
+
+    echo "Creating /root/.ssh"
+    mkdir -p /root/.ssh
+    if [[ -n "${pubkey}" ]]; then
+        echo "Downloading ${pubkey}"
+        curl ${pubkey} > /root/.ssh/authorized_keys || echo "Download failed"
+    fi
+
+    echo "Resetting permisions in /root"
+    chown -R root:root /root
+    find /root -type d -exec chmod 0750 \{\} \;
+    find /root -type f -exec chmod 0640 \{\} \;
+    chmod -R go-rwx /root/.ssh
+
+    echo "Final grub update"
+    update-grub
+    echo "Final initramfs update"
+    update-initramfs -k all -u
+    cd
+    rm -rf /tmp/*
+}
+
+install | tee /var/log/lmd-install.log
