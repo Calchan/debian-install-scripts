@@ -224,7 +224,6 @@ install() {
             gnome-shell-extension-bluetooth-quick-connect
             gnome-shell-extension-dash-to-panel
             gnome-shell-extension-manager
-            gnome-shell-extension-pixelsaver
             gnome-shell-extension-tiling-assistant
             dconf-editor
             nautilus
